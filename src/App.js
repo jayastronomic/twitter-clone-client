@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import Home from "./components/Home";
 
 import {
   fetchAuthUserSuccess,
@@ -15,10 +16,8 @@ const API = "http://localhost:3002/api/v1/logged_in";
 
 class App extends Component {
   handleLogin = (obj) => {
-    this.props.fetchAuthUserSuccess(obj);
-    if (obj) {
-      this.props.loggedIn(true);
-    }
+    this.props.fetchAuthUserSuccess(obj.user);
+    this.props.loggedIn(obj.logged_in);
   };
 
   handleLogout = (obj) => {
@@ -29,11 +28,11 @@ class App extends Component {
   loginStatus = () => {
     fetch(API, { credentials: "include" })
       .then((resp) => resp.json())
-      .then((obj) => {
-        if (obj) {
-          this.handleLogin(obj);
+      .then((resObj) => {
+        if (resObj.logged_in) {
+          this.handleLogin(resObj);
         } else {
-          this.handleLogout(obj);
+          this.handleLogout(resObj);
         }
       });
   };
@@ -45,8 +44,21 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Route exact path="/signup" render={() => <SignUp />} />
-        <Route exact path="/login" render={() => <Login />} />
+        <Route exact path="/home" render={() => <Home />} />
+        <Route
+          exact
+          path="/signup"
+          render={(props) => (
+            <SignUp history={props.history} handleLogin={this.handleLogin} />
+          )}
+        />
+        <Route
+          exact
+          path="/login"
+          render={(props) => (
+            <Login history={props.history} handleLogin={this.handleLogin} />
+          )}
+        />
       </Router>
     );
   }
