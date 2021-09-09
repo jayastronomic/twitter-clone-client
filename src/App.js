@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Home from "./components/Home";
+import Nav from "./components/Nav";
+import Trends from "./components/Trends";
 
 import {
   fetchAuthUserSuccess,
@@ -13,6 +15,20 @@ import {
 } from "./actions/userActions";
 
 const API = "http://localhost:3002/api/v1/logged_in";
+
+const NavRoute = ({ exact, path, component: Component, handleLogout }) => (
+  <Route
+    exact={exact}
+    path={path}
+    render={(props) => (
+      <div className="flex">
+        <Nav handleLogout={handleLogout} history={props.history} />
+        <Component {...props} />
+        <Trends />
+      </div>
+    )}
+  />
+);
 
 class App extends Component {
   handleLogin = (obj) => {
@@ -44,7 +60,12 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Route exact path="/home" render={() => <Home />} />
+        <NavRoute
+          exact
+          path="/"
+          component={Home}
+          handleLogout={this.handleLogout}
+        />
         <Route
           exact
           path="/signup"
