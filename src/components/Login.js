@@ -71,7 +71,10 @@ class Login extends Component {
 
       fetch(API, payload)
         .then((resp) => resp.json())
-        .then((resObj) => this.props.handleLogin(resObj));
+        .then((resObj) => {
+          console.log(resObj);
+          this.props.handleLogin(resObj);
+        });
 
       this.setState({
         usernameOrEmail: "",

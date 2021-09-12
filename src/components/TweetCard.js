@@ -7,7 +7,7 @@ const TweetCard = (props) => {
         <i className="fas fa-user-circle fa-3x text-gray-300"></i>
       </div>
       <div className="flex flex-col pl-4 w-full">
-        <p>@username</p>
+        <p className="text-gray-500">@{props.tweet_user_username}</p>
         <p className="break-words">{props.content}</p>
         <div className="pt-2 flex justify-between pr-20">
           <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-comment"></i>

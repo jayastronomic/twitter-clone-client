@@ -2,3 +2,7 @@
   width: 38rem;
   height: fit-content;
 }
+
+.outer-tweet-modal {
+  z-index: 2;
+}

@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  HomeNavRoute,
+  ProfileNavRoute,
+} from "./components/NavRoutes/NavRoutes";
+
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Home from "./components/Home";
-import Nav from "./components/Nav";
-import Trends from "./components/Trends";
+import Profile from "./components/Profile";
 
 import {
   fetchAuthUserSuccess,
@@ -16,23 +20,23 @@ import {
 
 const API = "http://localhost:3002/api/v1/logged_in";
 
-const NavRoute = ({ exact, path, component: Component, handleLogout }) => (
-  <Route
-    exact={exact}
-    path={path}
-    render={(props) => (
-      <div className="flex">
-        <Nav handleLogout={handleLogout} history={props.history} />
-        <Component {...props} />
-        <Trends />
-      </div>
-    )}
-  />
-);
+// const NavRoute = ({ exact, path, component: Component, handleLogout }) => (
+//   <Route
+//     exact={exact}
+//     path={path}
+//     render={(props) => (
+//       <div className="flex">
+//         <Nav handleLogout={handleLogout} history={props.history} />
+//         <Component {...props} />
+//         <Trends />
+//       </div>
+//     )}
+//   />
+// );
 
 class App extends Component {
   handleLogin = (obj) => {
-    this.props.fetchAuthUserSuccess(obj.user);
+    this.props.fetchAuthUserSuccess(obj);
     this.props.loggedIn(obj.logged_in);
   };
 
@@ -45,6 +49,7 @@ class App extends Component {
     fetch(API, { credentials: "include" })
       .then((resp) => resp.json())
       .then((resObj) => {
+        console.log(resObj);
         if (resObj.logged_in) {
           this.handleLogin(resObj);
         } else {
@@ -60,11 +65,18 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <NavRoute
+        <HomeNavRoute
           exact
           path="/"
           component={Home}
           handleLogout={this.handleLogout}
+        />
+        <ProfileNavRoute
+          exact
+          path={`/${this.props.authUser.username}`}
+          component={Profile}
+          handleLogout={this.handleLogout}
+          authUser={this.props.authUser}
         />
         <Route
           exact

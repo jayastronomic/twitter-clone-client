@@ -18,3 +18,10 @@ export const removeAuthUser = (obj) => {
     authUser: obj,
   };
 };
+
+export const updateAuthUserSuccess = (obj) => {
+  return {
+    type: "UPDATE_AUTH_USER_SUCCESS",
+    updatedAuthUser: obj,
+  };
+};

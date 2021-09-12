@@ -29,7 +29,10 @@ const Nav = (props) => {
           <i className="fab fa-twitter fa-2x text-blue-400 hover:bg-blue-100 rounded-full transition p-4 cursor-pointer"></i>
         </div>
         <div>
-          <Link className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition">
+          <Link
+            to="/"
+            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+          >
             <i className="fas fa-home"></i> Home
           </Link>
         </div>
@@ -59,7 +62,10 @@ const Nav = (props) => {
           </Link>
         </div>
         <div>
-          <Link className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition">
+          <Link
+            to={props.authUserHandle}
+            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+          >
             <i className="far fa-user"></i> Profile
           </Link>
         </div>
@@ -71,7 +77,7 @@ const Nav = (props) => {
 
         <button
           onClick={() => props.toggle(!props.toggleTweetModal)}
-          className="text-xl font-bold text-white bg-blue-500 rounded-full hover:bg-blue-600 py-2"
+          className="text-xl font-medium text-white bg-blue-500 rounded-full hover:bg-blue-600 py-2"
         >
           Tweet
         </button>
@@ -92,6 +98,7 @@ const Nav = (props) => {
 const mapStatetoProps = (state) => {
   return {
     toggleTweetModal: state.toggleTweetModal,
+    authUserHandle: `/${state.authUser.username}`,
   };
 };
 

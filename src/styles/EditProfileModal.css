@@ -1,0 +1,12 @@
+.edit-profile-modal {
+  z-index: 2;
+}
+
+.edit-profile-form {
+  height: 40rem;
+  width: 38rem;
+}
+
+/* .save-button-container {
+  width: 10rem;
+} */

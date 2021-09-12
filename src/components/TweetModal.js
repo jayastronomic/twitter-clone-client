@@ -51,7 +51,7 @@ class TweetModal extends Component {
 
   render() {
     return (
-      <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center pt-10">
+      <div className="outer-tweet-modal absolute inset-0 bg-black bg-opacity-50 flex justify-center pt-10">
         <form
           onSubmit={this.handleSubmit}
           className="flex flex-col bg-white rounded-2xl tweet-modal"
