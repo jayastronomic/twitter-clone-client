@@ -49,7 +49,6 @@ class App extends Component {
     fetch(API, { credentials: "include" })
       .then((resp) => resp.json())
       .then((resObj) => {
-        console.log(resObj);
         if (resObj.logged_in) {
           this.handleLogin(resObj);
         } else {
@@ -71,13 +70,6 @@ class App extends Component {
           component={Home}
           handleLogout={this.handleLogout}
         />
-        <ProfileNavRoute
-          exact
-          path={`/${this.props.authUser.username}`}
-          component={Profile}
-          handleLogout={this.handleLogout}
-          authUser={this.props.authUser}
-        />
         <Route
           exact
           path="/signup"
@@ -91,6 +83,13 @@ class App extends Component {
           render={(props) => (
             <Login history={props.history} handleLogin={this.handleLogin} />
           )}
+        />
+
+        <ProfileNavRoute
+          path={`/${this.props.authUser.username}`}
+          component={Profile}
+          handleLogout={this.handleLogout}
+          authUser={this.props.authUser}
         />
       </Router>
     );

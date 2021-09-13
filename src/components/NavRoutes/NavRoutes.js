@@ -30,7 +30,6 @@ export const ProfileNavRoute = ({
   authUser,
 }) => (
   <Route
-    exact={exact}
     path={path}
     render={(props) => (
       <div className="flex">

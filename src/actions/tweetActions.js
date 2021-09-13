@@ -11,3 +11,17 @@ export const createTweetSuccess = (obj) => {
     tweet: obj,
   };
 };
+
+export const fetchAuthUserTweetsSuccess = (arr) => {
+  return {
+    type: "FETCH_AUTH_USER_TWEETS_SUCCESS",
+    authUserTweets: arr,
+  };
+};
+
+export const createAuthUserTweetSuccess = (obj) => {
+  return {
+    type: "CREATE_AUTH_USER_TWEET_SUCCESS",
+    authUserTweet: obj,
+  };
+};

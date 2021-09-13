@@ -4,7 +4,10 @@ import "../styles/TweetModal.css";
 import { connect } from "react-redux";
 import { toggle } from "../actions/tweetModalActions";
 
-import { createTweetSuccess } from "../actions/tweetActions";
+import {
+  createTweetSuccess,
+  createAuthUserTweetSuccess,
+} from "../actions/tweetActions";
 
 const API = "http://localhost:3002/api/v1/tweets";
 
@@ -40,7 +43,10 @@ class TweetModal extends Component {
 
     fetch(API, payload)
       .then((resp) => resp.json())
-      .then((resObj) => this.props.createTweetSuccess(resObj));
+      .then((resObj) => {
+        this.props.createTweetSuccess(resObj);
+        this.props.createAuthUserTweetSuccess(resObj);
+      });
 
     this.setState({
       content: "",
@@ -104,6 +110,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   toggle,
   createTweetSuccess,
+  createAuthUserTweetSuccess,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TweetModal);

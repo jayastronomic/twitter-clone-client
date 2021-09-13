@@ -2,6 +2,10 @@
   width: 37.5rem;
 }
 
-/* .profile-header {
-  z-index: 1;
-} */
+.profile-header {
+  z-index: 99;
+}
+
+.profile::-webkit-scrollbar {
+  display: none;
+}

@@ -11,9 +11,8 @@ import { toggleEditProfileModal } from "../actions/editProfileModalActions";
 
 const ProfileInformation = (props) => {
   return (
-    <div className="profile-information flex flex-col-reverse  border-b bg-cover ">
+    <div className="profile-information flex flex-col-reverse bg-cover ">
       <div className="flex flex-col-reverse bg-white profile-information-details">
-        <ProfileNav />
         <div className="flex pb-4 pl-4 space-x-4">
           <p>
             <span className="font-bold">0</span>{" "}
@@ -27,11 +26,11 @@ const ProfileInformation = (props) => {
 
         <div className="pl-4 flex space-x-2">
           <div className="text-gray-500">
-            <i class="fas fa-map-marker-alt"></i> Chicago
+            <i className="fas fa-map-marker-alt"></i> Chicago
           </div>
 
           <div className="text-gray-500">
-            <i class="far fa-calendar-check"></i> Joined January 2011
+            <i className="far fa-calendar-check"></i> Joined January 2011
           </div>
         </div>
 
