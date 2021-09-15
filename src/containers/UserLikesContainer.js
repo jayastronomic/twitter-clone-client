@@ -3,7 +3,7 @@ import TweetCard from "../components/TweetCard";
 
 const UserLikesContainer = (props) => {
   return (
-    <div className="tweet-container flex flex-col ">
+    <div className="flex flex-col ">
       {props.userLikes.map((tweet, i) => {
         return <TweetCard key={i} {...tweet} />;
       })}

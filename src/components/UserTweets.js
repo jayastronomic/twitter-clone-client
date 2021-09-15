@@ -13,7 +13,10 @@ class UserTweets extends Component {
       credentials: "include",
     })
       .then((resp) => resp.json())
-      .then((resObj) => this.props.fetchAuthUserTweetsSuccess(resObj));
+      .then((resObj) => {
+        console.log(resObj);
+        this.props.fetchAuthUserTweetsSuccess(resObj);
+      });
   }
   render() {
     if (this.props.authUserTweets.length > 0) {

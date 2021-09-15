@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { deleteLikeSuccess } from "../actions/likeActions";
 
+import AuthUserTweetDropdown from "./AuthUserTweetDropdown";
+import UserTweetDropdown from "./UserTweetDropdown";
+
 const API = "http://localhost:3002/api/v1/users";
 
 const TweetCard = (props) => {
   const [like, setLike] = useState(props.liked_by_current_user);
+  const [isOpen, setIsOpen] = useState(false);
   const likeTweet = () => {
     const newLike = {
       user: {
@@ -29,8 +33,8 @@ const TweetCard = (props) => {
         if (resObj.created) {
           setLike(!like);
         } else {
-          setLike(!like);
           props.deleteLikeSuccess(resObj.tweet);
+          setLike(!like);
         }
       });
   };
@@ -40,8 +44,26 @@ const TweetCard = (props) => {
         <i className="fas fa-user-circle fa-3x text-gray-300"></i>
       </div>
       <div className="flex flex-col pl-4 w-full">
-        <p className="text-gray-500">@{props.tweet_user_username}</p>
+        <div className="flex justify-between">
+          <p className="text-gray-500">@{props.tweet_user_username}</p>
+          <div className="relative pr-4">
+            <i
+              onClick={() => setIsOpen(!isOpen)}
+              className="transform translate-y-4 text-gray-400 fas fa-ellipsis-h hover:bg-blue-100 hover:text-blue-400 rounded-full p-2"
+            ></i>
+            {isOpen && (
+              <button
+                className="fixed z-50 inset-0 h-full w-full bg-black bg-opacity-0"
+                onClick={() => setIsOpen(false)}
+              ></button>
+            )}
+            {props.authUserId === props.user_id
+              ? isOpen && <AuthUserTweetDropdown />
+              : isOpen && <UserTweetDropdown />}
+          </div>
+        </div>
         <p className="break-words">{props.content}</p>
+
         <div className="pt-2 flex justify-between pr-20">
           <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-comment"></i>
           <i className="cursor-pointer transition hover:bg-green-100 p-2 rounded-full hover:text-green-400 fas fa-retweet"></i>

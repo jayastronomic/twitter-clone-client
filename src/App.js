@@ -11,6 +11,7 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
+import TweetDropdown from "./components/AuthUserTweetDropdown";
 
 import {
   fetchAuthUserSuccess,
@@ -77,6 +78,10 @@ class App extends Component {
           handleLogout={this.handleLogout}
           authUser={this.props.authUser}
         />
+
+        <Route path="/dropdown">
+          <TweetDropdown />
+        </Route>
       </Router>
     );
   }
