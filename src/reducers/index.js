@@ -5,6 +5,7 @@ import tweets from "./tweets";
 import toggleTweetModal from "./toggleTweetModal";
 import toggleEditProfileModal from "./toggleEditProfileModal";
 import authUserTweets from "./authUserTweets";
+import authUserLikes from "./authUserLikes";
 
 export default combineReducers({
   authUser,
@@ -13,4 +14,5 @@ export default combineReducers({
   toggleTweetModal,
   toggleEditProfileModal,
   authUserTweets,
+  authUserLikes,
 });

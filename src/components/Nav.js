@@ -37,27 +37,42 @@ const Nav = (props) => {
           </Link>
         </div>
         <div>
-          <Link className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition">
+          <Link
+            to=""
+            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+          >
             <i className="fas fa-hashtag"></i> Explore
           </Link>
         </div>
         <div>
-          <Link className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition">
+          <Link
+            to=""
+            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+          >
             <i className="far fa-bell"></i> Notifications
           </Link>
         </div>
         <div>
-          <Link className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition">
+          <Link
+            to=""
+            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+          >
             <i className="far fa-envelope"></i> Messages
           </Link>
         </div>
         <div>
-          <Link className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition">
+          <Link
+            to=""
+            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+          >
             <i className="far fa-bookmark"></i> Bookmarks
           </Link>
         </div>
         <div>
-          <Link className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition">
+          <Link
+            to=""
+            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+          >
             <i className="fas fa-bars"></i> Lists
           </Link>
         </div>
@@ -70,7 +85,10 @@ const Nav = (props) => {
           </Link>
         </div>
         <div>
-          <Link className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition">
+          <Link
+            to=""
+            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+          >
             <i className="far fa-comment-dots"></i> More
           </Link>
         </div>

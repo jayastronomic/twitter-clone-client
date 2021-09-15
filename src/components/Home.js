@@ -10,10 +10,9 @@ const API = "http://localhost:3002/api/v1/tweets";
 
 const Home = (props) => {
   useEffect(() => {
-    fetch(API)
+    fetch(API, { credentials: "include" })
       .then((resp) => resp.json())
       .then((resObj) => {
-        console.log(resObj);
         props.fetchTweetsSuccess(resObj);
       });
   }, []);

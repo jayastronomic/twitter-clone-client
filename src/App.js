@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import {
   HomeNavRoute,
   ProfileNavRoute,
@@ -19,20 +19,6 @@ import {
 } from "./actions/userActions";
 
 const API = "http://localhost:3002/api/v1/logged_in";
-
-// const NavRoute = ({ exact, path, component: Component, handleLogout }) => (
-//   <Route
-//     exact={exact}
-//     path={path}
-//     render={(props) => (
-//       <div className="flex">
-//         <Nav handleLogout={handleLogout} history={props.history} />
-//         <Component {...props} />
-//         <Trends />
-//       </div>
-//     )}
-//   />
-// );
 
 class App extends Component {
   handleLogin = (obj) => {

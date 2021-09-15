@@ -2,8 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import "../styles/ProfileInformation.css";
 
-import ProfileNav from "./ProfilleNav";
-import Bio from "./Bio";
+// import Bio from "./Bio";
 
 import EditProfleModal from "./EditProfileModal";
 

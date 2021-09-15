@@ -82,6 +82,7 @@ class TweetModal extends Component {
             <div className="flex items-center space-x-4">
               <i className="text-blue-400 far fa-image"></i>
               <img
+                alt=""
                 className="text-blue-400"
                 src="https://img.icons8.com/material-outlined/20/60a5fa/gif.png"
               />

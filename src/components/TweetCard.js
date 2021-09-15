@@ -1,6 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { deleteLikeSuccess } from "../actions/likeActions";
+
+const API = "http://localhost:3002/api/v1/users";
 
 const TweetCard = (props) => {
+  const [like, setLike] = useState(props.liked_by_current_user);
+  const likeTweet = () => {
+    const newLike = {
+      user: {
+        user_id: props.authUserId,
+        tweet_id: props.id,
+      },
+    };
+
+    const payload = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newLike),
+      credentials: "include",
+    };
+
+    fetch(API + `/${props.authUserId}/likes`, payload)
+      .then((resp) => resp.json())
+      .then((resObj) => {
+        if (resObj.created) {
+          setLike(!like);
+        } else {
+          setLike(!like);
+          props.deleteLikeSuccess(resObj.tweet);
+        }
+      });
+  };
   return (
     <div className="flex border-b pt-2 pl-2 pb-4 hover:bg-gray-100 transition ease-in-out cursor-pointer">
       <div className="">
@@ -12,7 +45,17 @@ const TweetCard = (props) => {
         <div className="pt-2 flex justify-between pr-20">
           <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-comment"></i>
           <i className="cursor-pointer transition hover:bg-green-100 p-2 rounded-full hover:text-green-400 fas fa-retweet"></i>
-          <i className="cursor-pointer transition hover:bg-red-100 p-2 rounded-full hover:text-red-400 far fa-heart"></i>
+          {like ? (
+            <i
+              className="cursor-pointer transition hover:bg-red-100 p-2 rounded-full text-red-400 fas fa-heart "
+              onClick={() => likeTweet()}
+            ></i>
+          ) : (
+            <i
+              className="cursor-pointer transition hover:bg-red-100 p-2 rounded-full hover:text-red-400 far fa-heart"
+              onClick={() => likeTweet()}
+            ></i>
+          )}
           <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-share-square"></i>
         </div>
       </div>
@@ -20,4 +63,14 @@ const TweetCard = (props) => {
   );
 };
 
-export default TweetCard;
+const mapStateToProps = (state) => {
+  return {
+    authUserId: state.authUser.id,
+  };
+};
+
+const mapDispatchToProps = {
+  deleteLikeSuccess,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TweetCard);
