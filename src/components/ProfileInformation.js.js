@@ -1,4 +1,4 @@
-import React from "react";
+import React, { u, useEffect } from "react";
 import { connect } from "react-redux";
 import "../styles/ProfileInformation.css";
 
@@ -6,19 +6,17 @@ import "../styles/ProfileInformation.css";
 
 import EditProfleModal from "./EditProfileModal";
 
-import { toggleEditProfileModal } from "../actions/editProfileModalActions";
-
 const ProfileInformation = (props) => {
   return (
     <div className="profile-information flex flex-col-reverse bg-cover ">
       <div className="flex flex-col-reverse bg-white profile-information-details">
         <div className="flex pb-4 pl-4 space-x-4">
           <p>
-            <span className="font-bold">0</span>{" "}
+            <span className="font-bold">{props.authUser.followings}</span>{" "}
             <span className="text-gray-500">Following</span>
           </p>
           <p>
-            <span className="font-bold">0</span>{" "}
+            <span className="font-bold">{props.authUser.followers}</span>{" "}
             <span className="text-gray-500">Followers</span>
           </p>
         </div>
@@ -61,15 +59,4 @@ const ProfileInformation = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    authUser: state.authUser,
-    showEditProfileModal: state.toggleEditProfileModal,
-  };
-};
-
-const mapDispatchToProps = {
-  toggleEditProfileModal,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileInformation);
+export default connect()(ProfileInformation);

@@ -6,6 +6,12 @@ export default function authUser(state = {}, action) {
       return action.authUser;
     case "UPDATE_AUTH_USER_SUCCESS":
       return action.updatedAuthUser;
+    case "ADD_FOLLOWING":
+      state.followings += 1;
+      return state;
+    case "SUB_FOLLOWING":
+      state.followings -= 1;
+      return state;
     default:
       return state;
   }

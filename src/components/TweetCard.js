@@ -38,6 +38,11 @@ const TweetCard = (props) => {
         }
       });
   };
+
+  const toggleAuthUserTweetDropdown = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="flex border-b pt-2 pl-2 pb-4 hover:bg-gray-100 transition ease-in-out cursor-pointer">
       <div className="">
@@ -55,10 +60,15 @@ const TweetCard = (props) => {
               <button
                 className="fixed z-50 inset-0 h-full w-full bg-black bg-opacity-0"
                 onClick={() => setIsOpen(false)}
-              ></button>
+              />
             )}
             {props.authUserId === props.user_id
-              ? isOpen && <AuthUserTweetDropdown />
+              ? isOpen && (
+                  <AuthUserTweetDropdown
+                    tweetId={props.id}
+                    toggleAuthUserTweetDropdown={toggleAuthUserTweetDropdown}
+                  />
+                )
               : isOpen && <UserTweetDropdown />}
           </div>
         </div>
@@ -71,12 +81,12 @@ const TweetCard = (props) => {
             <i
               className="cursor-pointer transition hover:bg-red-100 p-2 rounded-full text-red-400 fas fa-heart "
               onClick={() => likeTweet()}
-            ></i>
+            />
           ) : (
             <i
               className="cursor-pointer transition hover:bg-red-100 p-2 rounded-full hover:text-red-400 far fa-heart"
               onClick={() => likeTweet()}
-            ></i>
+            />
           )}
           <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-share-square"></i>
         </div>

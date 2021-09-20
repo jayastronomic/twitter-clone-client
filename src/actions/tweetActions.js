@@ -25,3 +25,17 @@ export const createAuthUserTweetSuccess = (obj) => {
     authUserTweet: obj,
   };
 };
+
+export const deleteTweetSuccess = (obj) => {
+  return {
+    type: "DELETE_TWEET_SUCCESS",
+    deletedTweet: obj,
+  };
+};
+
+export const deleteAuthUserTweetSuccess = (obj) => {
+  return {
+    type: "DELETE_AUTH_USER_TWEET_SUCCESS",
+    deletedAuthUserTweet: obj,
+  };
+};

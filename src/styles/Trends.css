@@ -1,7 +1,9 @@
 .trends {
   width: 45.5rem;
+  background-image: url("https://media1.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-
 .cantarell {
   font-family: "Cantarell", sans-serif;
 }

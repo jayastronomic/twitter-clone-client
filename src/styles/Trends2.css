@@ -1,0 +1,7 @@
+.trends-container {
+  width: 24rem;
+}
+
+.trends::-webkit-scrollbar {
+  display: none;
+}

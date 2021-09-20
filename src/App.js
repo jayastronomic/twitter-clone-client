@@ -5,13 +5,14 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import {
   HomeNavRoute,
   ProfileNavRoute,
+  ConnectNavRoute,
 } from "./components/NavRoutes/NavRoutes";
 
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
-import TweetDropdown from "./components/AuthUserTweetDropdown";
+import Connect from "./components/Connect";
 
 import {
   fetchAuthUserSuccess,
@@ -79,9 +80,12 @@ class App extends Component {
           authUser={this.props.authUser}
         />
 
-        <Route path="/dropdown">
-          <TweetDropdown />
-        </Route>
+        <ConnectNavRoute
+          path={"/connect"}
+          component={Connect}
+          handleLogout={this.handleLogout}
+          authUser={this.props.authUser}
+        />
       </Router>
     );
   }
