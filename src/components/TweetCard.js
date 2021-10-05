@@ -44,13 +44,23 @@ const TweetCard = (props) => {
   };
 
   return (
-    <div className="flex border-b pt-2 pl-2 pb-4 hover:bg-gray-100 transition ease-in-out cursor-pointer">
+    <div className="flex border-b pt-2 pl-2 pb-4 hover:bg-gray-100 transition ease-in-out cursor-pointer overflow-visible">
       <div className="">
-        <i className="fas fa-user-circle fa-3x text-gray-300"></i>
+        {props.avatar_exist ? (
+          <div className="relative rounded-full overflow-hidden flex items-center justify-center w-12 h-12 hover:bg-black">
+            <div className="absolute rounded-full flex w-12 h-12 hover:bg-black opacity-20 transition"></div>
+            <img className="object-cover" alt="avatar" src={props.avatar_url} />
+          </div>
+        ) : (
+          <i className="fas fa-user-circle fa-3x text-gray-300"></i>
+        )}
       </div>
       <div className="flex flex-col pl-4 w-full">
         <div className="flex justify-between">
-          <p className="text-gray-500">@{props.tweet_user_username}</p>
+          <div className="flex space-x-0.5">
+            <p className="font-semibold">{props.tweet_user_name}</p>
+            <p className="text-gray-500">@{props.tweet_user_username}</p>
+          </div>
           <div className="relative pr-4">
             <i
               onClick={() => setIsOpen(!isOpen)}

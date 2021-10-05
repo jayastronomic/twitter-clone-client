@@ -20,7 +20,8 @@ export const trendSeedData = [
     description: "Studies show, most beautiful woman live in the Chi",
     hashtag: "WeLoveChicagoWomen",
     name: "Black Women",
-    imgUrl: "https://pbs.twimg.com/media/D3hEiUOX4AIjdh7?format=jpg&name=large",
+    imgUrl:
+      "https://pbs.twimg.com/profile_images/1395195026041356288/qsmpSIwx_400x400.jpg",
   },
   {
     topic: "Sports . Trending",

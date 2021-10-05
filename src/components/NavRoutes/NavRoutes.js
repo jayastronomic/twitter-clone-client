@@ -8,13 +8,18 @@ export const HomeNavRoute = ({
   path,
   component: Component,
   handleLogout,
+  authUser,
 }) => (
   <Route
     exact={exact}
     path={path}
     render={(props) => (
       <div className="flex">
-        <Nav handleLogout={handleLogout} history={props.history} />
+        <Nav
+          handleLogout={handleLogout}
+          history={props.history}
+          authUser={authUser}
+        />
         <Component {...props} />
         <Trends2 />
       </div>
@@ -33,7 +38,11 @@ export const ProfileNavRoute = ({
     path={path}
     render={(props) => (
       <div className="flex">
-        <Nav handleLogout={handleLogout} history={props.history} />
+        <Nav
+          handleLogout={handleLogout}
+          history={props.history}
+          authUser={authUser}
+        />
         <Component {...props} authUser={authUser} />
         <Trends2 />
       </div>
@@ -52,7 +61,11 @@ export const ConnectNavRoute = ({
     path={path}
     render={(props) => (
       <div className="flex">
-        <Nav handleLogout={handleLogout} history={props.history} />
+        <Nav
+          handleLogout={handleLogout}
+          history={props.history}
+          authUser={authUser}
+        />
         <Component {...props} authUser={authUser} />
         <Trends2 />
       </div>

@@ -6,6 +6,8 @@ import "../styles/ProfileInformation.css";
 
 import EditProfleModal from "./EditProfileModal";
 
+import { toggleEditProfileModal } from "../actions/editProfileModalActions";
+
 const ProfileInformation = (props) => {
   return (
     <div className="profile-information flex flex-col-reverse bg-cover ">
@@ -40,9 +42,7 @@ const ProfileInformation = (props) => {
 
         <div className="edit-button-container flex flex-row-reverse pb-8 pr-4 py-2">
           <button
-            onClick={() =>
-              props.toggleEditProfileModal(!props.showEditProfileModal)
-            }
+            onClick={() => props.toggleEditProfileModal()}
             className="transition font-bold rounded-full border border-gray-400 px-4 py-2 hover:bg-gray-100"
           >
             Edit Profile
@@ -59,4 +59,14 @@ const ProfileInformation = (props) => {
   );
 };
 
-export default connect()(ProfileInformation);
+const mapStateToProps = (state) => {
+  return {
+    showEditProfileModal: state.toggleEditProfileModal,
+  };
+};
+
+const mapDispatchToProps = {
+  toggleEditProfileModal,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileInformation);

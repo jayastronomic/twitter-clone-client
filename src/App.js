@@ -10,6 +10,7 @@ import {
 
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import Connect from "./components/Connect";
@@ -57,6 +58,7 @@ class App extends Component {
           path="/"
           component={Home}
           handleLogout={this.handleLogout}
+          authUser={this.props.authUser}
         />
         <Route
           exact
@@ -70,6 +72,13 @@ class App extends Component {
           path="/login"
           render={(props) => (
             <Login history={props.history} handleLogin={this.handleLogin} />
+          )}
+        />
+        <Route
+          exact
+          path="/logout"
+          render={(props) => (
+            <Logout history={props.history} handleLogout={this.handleLogout} />
           )}
         />
 

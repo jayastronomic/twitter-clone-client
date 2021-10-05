@@ -1,32 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Nav.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import TweetModal from "./TweetModal";
+import LogOutDropdown from "./LogOutDropdown";
 
 import { toggle } from "../actions/tweetModalActions";
 
-const API = "http://localhost:3002/api/v1/logout";
-
 const Nav = (props) => {
-  const logOff = () => {
-    fetch(API, { method: "DELETE" })
-      .then((resp) => resp.json())
-      .then((resObj) => props.handleLogout(resObj));
-
-    redirect();
-  };
-
-  const redirect = () => {
-    props.history.push("/login");
-  };
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="nav border-r h-screen flex flex-row-reverse ">
-      <div className="flex flex-col pt-4 space-y-8 pr-14">
+    <nav className="nav border-r h-screen flex flex-row-reverse">
+      <div className="flex flex-col pt-4 space-y-6 pr-14">
         <div>
-          <i className="fab fa-twitter fa-2x text-blue-400 hover:bg-blue-100 rounded-full transition p-4 cursor-pointer"></i>
+          <i className="fab fa-twitter fa-2x twitter-blue hover:bg-blue-100 rounded-full transition p-4 cursor-pointer"></i>
         </div>
         <div>
           <Link
@@ -99,16 +88,32 @@ const Nav = (props) => {
         >
           Tweet
         </button>
-        <div className=" flex flex-col-reverse h-72 pb-2">
-          <button
-            onClick={() => logOff()}
-            className=" text-xl font-bold text-white bg-blue-500 rounded-full hover:bg-blue-600 py-2"
-          >
-            Log out
-          </button>
+        <div className="flex relative w-full h-32">
+          {isOpen && <LogOutDropdown authUser={props.authUser} />}
         </div>
+
+        <div
+          onClick={() => setIsOpen(true)}
+          className="relative flex rounded-full hover:bg-gray-200 pl-3 py-3 pr-10 items-center cursor-pointer transition"
+        >
+          <div className="rounded-full overflow-hidden h-12 w-12">
+            <img alt="avatar object-cover" src={props.authUserAvatarUrl} />
+          </div>
+          <div className="flex flex-col pl-2">
+            <p className="font-semibold">{props.authUserName}</p>
+            <p className="text-gray-500">@{props.authUserUsername}</p>
+          </div>
+          <i className=" absolute fa fa-ellipsis-h right-4" />
+        </div>
+
+        {isOpen && (
+          <button
+            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 bg-black h-full w-full z-50 bg-opacity-0"
+          />
+        )}
       </div>
-      {props.toggleTweetModal && <TweetModal />}
+      {props.toggleTweetModal && <TweetModal authUser={props.authUser} />}
     </nav>
   );
 };
@@ -117,6 +122,9 @@ const mapStatetoProps = (state) => {
   return {
     toggleTweetModal: state.toggleTweetModal,
     authUserHandle: `/${state.authUser.username}`,
+    authUserAvatarUrl: state.authUser.avatar_url,
+    authUserUsername: state.authUser.username,
+    authUserName: state.authUser.name,
   };
 };
 

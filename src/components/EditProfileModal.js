@@ -11,11 +11,13 @@ const API = "http://localhost:3002/api/v1/users/";
 class EditProfleModal extends Component {
   constructor(props) {
     super(props);
+    this.inputRef = React.createRef();
     this.state = {
       name: this.props.authUser.name,
       bio: this.props.authUser.bio,
       location: this.props.authUser.location,
       website: this.props.authUser.website,
+      avatarUrl: this.props.authUser.avatar_url,
     };
   }
 
@@ -51,6 +53,10 @@ class EditProfleModal extends Component {
     this.props.toggleEditProfileModal(!this.props.showEditProfileModal);
   };
 
+  uploadPhoto = () => {
+    this.inputRef.current.click();
+  };
+
   render() {
     return (
       <div className="edit-profile-modal flex absolute inset-0 bg-black bg-opacity-50 justify-center items-center">
@@ -60,14 +66,10 @@ class EditProfleModal extends Component {
         >
           <div className="flex justify-between border-b p-4">
             <div className="flex items-center space-x-10">
-              <i
-                onClick={() =>
-                  this.props.toggleEditProfileModal(
-                    !this.props.showEditProfileModal
-                  )
-                }
-                className="fas fa-times cursor-pointer"
-              ></i>
+              <button
+                onClick={() => this.props.toggleEditProfileModal()}
+                className="fas fa-times w-8 h-8 hover:bg-gray-200 rounded-full"
+              ></button>
               <p className="font-bold text-xl"> Edit Profile</p>
             </div>
 
@@ -82,8 +84,30 @@ class EditProfleModal extends Component {
             </div>
           </div>
 
-          <div className="flex justify-center pt-4">
-            <i className="fas fa-user-circle fa-6x text-gray-300"></i>
+          <div className="flex justify-center items-center pt-4 space-x-8">
+            {this.props.authUser.avatar_exist ? (
+              <div className="flex relative rounded-full justify-center items-center w-28 h-28 overflow-hidden">
+                <img
+                  className="object-cover"
+                  alt="avatar"
+                  src={this.state.avatarUrl}
+                />
+                <button
+                  onClick={() => this.uploadPhoto()}
+                  className="absolute fas fa-camera text-2xl text-black opacity-50 cursor-pointer"
+                />
+                <input
+                  className="absolute hidden"
+                  id="avatar"
+                  name="avatar"
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  ref={this.inputRef}
+                />
+              </div>
+            ) : (
+              <i className="fas fa-user-circle fa-6x text-gray-300"></i>
+            )}
           </div>
 
           <div className="flex flex-col px-4 pt-4 ">

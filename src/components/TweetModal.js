@@ -65,11 +65,21 @@ class TweetModal extends Component {
           <div className="border-b pl-4 py-2">
             <button
               onClick={() => this.props.toggle(!this.props.toggleTweetModal)}
-              className="rounded-full fas fa-times hover:bg-gray-200 p-2"
+              className="rounded-full fas fa-times hover:bg-gray-200 h-8 w-8"
             ></button>
           </div>
           <div className="pt-2 flex pr-4 pl-4">
-            <i class="fas fa-user-circle fa-3x text-gray-300"></i>
+            {this.props.authUser.avatar_exist ? (
+              <div className=" rounded-full overflow-hidden w-16 h-14">
+                <img
+                  className="object-cover"
+                  alt="avatar"
+                  src={this.props.authUser.avatar_url}
+                />
+              </div>
+            ) : (
+              <i class="fas fa-user-circle fa-3x text-gray-300"></i>
+            )}
             <textarea
               onChange={this.handleChange}
               name="content"

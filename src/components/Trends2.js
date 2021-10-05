@@ -36,9 +36,8 @@ const Trends2 = () => {
         <div className="pt-4">
           <div className="bg-gray-100 rounded-2xl">
             <div className="p-4 font-bold text-xl">What's Happening</div>
-            {trendSeedData.map((trend) => {
-              console.log(trend);
-              return <TrendCard trend={trend} />;
+            {trendSeedData.map((trend, i) => {
+              return <TrendCard key={i} trend={trend} />;
             })}
             <div className="p-4 text-blue-500 hover:bg-gray-200 rounded-b-2xl cursor-pointer">
               Show more
