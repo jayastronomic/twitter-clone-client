@@ -39,3 +39,9 @@ export const deleteAuthUserTweetSuccess = (obj) => {
     deletedAuthUserTweet: obj,
   };
 };
+
+export const addTweetCount = () => {
+  return {
+    type: "ADD_TWEET_COUNT",
+  };
+};

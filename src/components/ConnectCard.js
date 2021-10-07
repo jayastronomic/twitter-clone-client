@@ -8,7 +8,7 @@ import { addFollowing, subFollowing } from "../actions/followActions";
 const API = "http://localhost:3002/api/v1/follows";
 
 const ConnectCard = (props) => {
-  const [following, setFollowing] = useState(false);
+  const [following, setFollowing] = useState(props.user.followed_user);
   const follow = () => {
     const newFollow = {
       user: {
@@ -43,7 +43,13 @@ const ConnectCard = (props) => {
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <div>
-            <i className="fas fa-user-circle fa-3x text-gray-300" />
+            {props.user.avatar_exist ? (
+              <div className="flex overflow-hidden rounded-full w-14">
+                <img alt="avatar" src={props.user.avatar_url} />
+              </div>
+            ) : (
+              <i className="fas fa-user-circle fa-3x text-gray-300" />
+            )}
           </div>
           <div className="-space-y-2 pl-4">
             <p className="font-medium">{props.user.name}</p>

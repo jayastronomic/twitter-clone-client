@@ -12,6 +12,10 @@ export default function authUser(state = {}, action) {
     case "SUB_FOLLOWING":
       state.followings -= 1;
       return state;
+    case "ADD_TWEET_COUNT":
+      console.log(state);
+      state.total_tweets += 1;
+      return state;
     default:
       return state;
   }

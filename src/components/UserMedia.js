@@ -1,9 +1,11 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+
 const UserMedia = () => {
-  let { pageId } = useParams();
-  console.log(pageId);
-  return <div>Media</div>;
+  return (
+    <div className="flex items-center justify-center h-full text-2xl text-gray-400">
+      <p>Media Feature Coming Soon</p>
+    </div>
+  );
 };
 
 export default UserMedia;

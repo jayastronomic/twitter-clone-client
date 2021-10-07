@@ -1,4 +1,4 @@
-import React, { u, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import "../styles/ProfileInformation.css";
 
@@ -50,7 +50,13 @@ const ProfileInformation = (props) => {
         </div>
       </div>
       <div className="pl-4 transform translate-y-14">
-        <i className="fas fa-user-circle fa-8x text-gray-300"></i>
+        {props.authUser.avatar_exist ? (
+          <div className="rounded-full overflow-hidden w-32 border-4 border-white">
+            <img alt="avatar" src={props.authUser.avatar_url} />
+          </div>
+        ) : (
+          <i className="fas fa-user-circle fa-8x text-gray-300"></i>
+        )}
       </div>
       {props.showEditProfileModal && (
         <EditProfleModal authUser={props.authUser} />

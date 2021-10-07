@@ -14,7 +14,6 @@ class UserTweets extends Component {
     })
       .then((resp) => resp.json())
       .then((resObj) => {
-        console.log(resObj);
         this.props.fetchAuthUserTweetsSuccess(resObj);
       });
   }

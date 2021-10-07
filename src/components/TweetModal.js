@@ -7,6 +7,7 @@ import { toggle } from "../actions/tweetModalActions";
 import {
   createTweetSuccess,
   createAuthUserTweetSuccess,
+  addTweetCount,
 } from "../actions/tweetActions";
 
 const API = "http://localhost:3002/api/v1/tweets";
@@ -46,6 +47,7 @@ class TweetModal extends Component {
       .then((resObj) => {
         this.props.createTweetSuccess(resObj);
         this.props.createAuthUserTweetSuccess(resObj);
+        this.props.addTweetCount();
       });
 
     this.setState({
@@ -122,6 +124,7 @@ const mapDispatchToProps = {
   toggle,
   createTweetSuccess,
   createAuthUserTweetSuccess,
+  addTweetCount,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TweetModal);
