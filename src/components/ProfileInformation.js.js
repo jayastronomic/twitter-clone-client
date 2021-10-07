@@ -29,7 +29,8 @@ const ProfileInformation = (props) => {
           </div>
 
           <div className="text-gray-500">
-            <i className="far fa-calendar-check"></i> Joined January 2011
+            <i className="far fa-calendar-check"></i> Joined{" "}
+            {props.authUser.month_joined} {props.authUser.year_joined}
           </div>
         </div>
 

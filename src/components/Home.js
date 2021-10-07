@@ -15,7 +15,7 @@ const Home = (props) => {
       .then((resObj) => {
         props.fetchTweetsSuccess(resObj);
       });
-  }, []);
+  });
 
   if (props.tweets.length > 0) {
     return (

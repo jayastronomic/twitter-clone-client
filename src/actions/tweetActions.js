@@ -40,6 +40,13 @@ export const deleteAuthUserTweetSuccess = (obj) => {
   };
 };
 
+export const loadAuthUserTweetCount = (num) => {
+  return {
+    type: "LOAD_AUTH_USER_TWEET_COUNT",
+    num: num,
+  };
+};
+
 export const addTweetCount = () => {
   return {
     type: "ADD_TWEET_COUNT",

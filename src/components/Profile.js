@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/Profile.css";
 import { connect } from "react-redux";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
@@ -10,7 +10,12 @@ import UserTweetsAndReplies from "./UserTweetsAndReplies";
 import UserMedia from "./UserMedia";
 import UserLikes from "./UserLikes";
 
+import { loadAuthUserTweetCount } from "../actions/tweetActions";
+
 const Profile = (props) => {
+  useEffect(() => {
+    props.loadAuthUserTweetCount(props.authUser.total_tweets);
+  });
   let { path, url } = useRouteMatch();
 
   return (
@@ -22,8 +27,8 @@ const Profile = (props) => {
         <div className="flex flex-col pl-10 -space-y-1.5">
           <p className="font-bold text-xl">{props.authUser.name}</p>
           <p className="text-sm text-gray-500">
-            {props.authUser.total_tweets}{" "}
-            {props.authUser.total_tweets === 1 ? "Tweet" : "Tweets"}
+            {props.authUserTweetCount}{" "}
+            {props.authUserTweetCount === 1 ? "Tweet" : "Tweets"}
           </p>
         </div>
       </div>
@@ -46,5 +51,14 @@ const Profile = (props) => {
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    authUserTweetCount: state.authUserTweetCount,
+  };
+};
 
-export default connect(null, null)(Profile);
+const mapDispatchToProps = {
+  loadAuthUserTweetCount,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

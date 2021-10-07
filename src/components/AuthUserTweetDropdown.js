@@ -32,11 +32,7 @@ const AuthUserTweetDropdown = (props) => {
         <i className="far fa-chart-bar"></i> <p>View Tweet activity</p>
       </div>
       {isOpen && (
-        <DeleteTweetModal
-          toggleAuthUserTweetDropdown={props.toggleAuthUserTweetDropdown}
-          setIsOpen={setIsOpen}
-          tweetId={props.tweetId}
-        />
+        <DeleteTweetModal setIsOpen={setIsOpen} tweetId={props.tweetId} />
       )}
     </div>
   );

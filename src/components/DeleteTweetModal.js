@@ -19,7 +19,6 @@ const DeleteTweetModal = (props) => {
         if (resObj.destroyed) {
           props.deleteTweetSuccess(resObj);
           props.deleteAuthUserTweetSuccess(resObj);
-          props.toggleAuthUserTweetDropdown();
         }
       });
   };
