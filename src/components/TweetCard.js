@@ -49,13 +49,13 @@ const TweetCard = (props) => {
         {props.avatar_exist ? (
           <div className="relative rounded-full overflow-hidden flex items-center justify-center w-12 h-12 hover:bg-black">
             <div className="absolute rounded-full flex w-12 h-12 hover:bg-black opacity-20 transition"></div>
-            <img className="object-cover" alt="avatar" src={props.avatar_url} />
+            <img className="" alt="avatar" src={props.avatar_url} />
           </div>
         ) : (
           <i className="fas fa-user-circle fa-3x text-gray-300"></i>
         )}
       </div>
-      <div className="flex flex-col pl-4 w-full">
+      <div className="flex flex-col pl-4 w-full -space-y-2">
         <div className="flex justify-between">
           <div className="flex space-x-0.5">
             <p className="font-semibold">{props.tweet_user_name}</p>
@@ -82,7 +82,7 @@ const TweetCard = (props) => {
               : isOpen && <UserTweetDropdown />}
           </div>
         </div>
-        <p className="break-words">{props.content}</p>
+        <p className="break-words pb-2">{props.content}</p>
 
         <div className="pt-2 flex justify-between pr-20">
           <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-comment"></i>

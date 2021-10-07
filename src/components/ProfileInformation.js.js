@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import "../styles/ProfileInformation.css";
+import { Link } from "react-router-dom";
 
 // import Bio from "./Bio";
 
@@ -23,10 +24,20 @@ const ProfileInformation = (props) => {
           </p>
         </div>
 
-        <div className="pl-4 flex space-x-2">
-          <div className="text-gray-500">
-            <i className="fas fa-map-marker-alt"></i> Chicago
-          </div>
+        <div className="pl-4 flex">
+          {props.authUser.location ? (
+            <div className="text-gray-500 space-x-2 flex items-center">
+              <i className="fa fa-map-marker-alt"></i>
+              <p className="pr-4">{props.authUser.location}</p>
+            </div>
+          ) : null}
+
+          {props.authUser.website ? (
+            <div className="flex text-gray-500 space-x-2 items-center">
+              <i className="fas fa-link" />{" "}
+              <Link className="pr-4">{props.authUser.website}</Link>
+            </div>
+          ) : null}
 
           <div className="text-gray-500">
             <i className="far fa-calendar-check"></i> Joined{" "}

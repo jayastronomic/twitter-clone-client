@@ -34,7 +34,7 @@ class EditProfleModal extends Component {
       name: this.state.name,
       bio: this.state.bio,
       location: this.state.location,
-      website: this.props.authUser.website,
+      website: this.state.website,
     };
 
     const payload = {
@@ -134,7 +134,7 @@ class EditProfleModal extends Component {
                 onChange={this.handleChange}
                 name="bio"
                 value={this.state.bio}
-                className=" rounded-b border-gray-300 focus:outline-none border-b border-l border-r p-2"
+                className="rounded-b border-gray-300 focus:outline-none border-b border-l border-r p-2"
               />
             </div>
           </div>
@@ -148,7 +148,7 @@ class EditProfleModal extends Component {
                 onChange={this.handleChange}
                 name="location"
                 value={this.state.location}
-                className=" rounded-b border-gray-300 focus:outline-none border-b border-l border-r p-2"
+                className="rounded-b border-gray-300 focus:outline-none border-b border-l border-r p-2"
               />
             </div>
           </div>
@@ -162,7 +162,7 @@ class EditProfleModal extends Component {
                 onChange={this.handleChange}
                 name="website"
                 value={this.state.website}
-                className=" rounded-b border-gray-300 focus:outline-none border-b border-l border-r p-2"
+                className="rounded-b border-gray-300 focus:outline-none border-b border-l border-r p-2"
               />
             </div>
           </div>
