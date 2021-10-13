@@ -6,7 +6,7 @@ import "../styles/TweetContainer.css";
 
 const TweetContainer = (props) => {
   return (
-    <div className="tweet-container flex flex-col overflow-auto overflow-x-hidden">
+    <div className="tweet-container flex flex-col overflow-auto">
       <HomeTweetForm authUser={props.authUser} />
       {props.tweets.map((tweet) => {
         return <TweetCard key={tweet.id} {...tweet} />;

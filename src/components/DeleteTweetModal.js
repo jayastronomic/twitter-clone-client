@@ -39,7 +39,7 @@ const DeleteTweetModal = (props) => {
             Delete
           </button>
           <button
-            onClick={() => props.setIsOpen(false)}
+            onClick={() => props.setIsDeleteTweetModalOpen(false)}
             className="border rounded-full font-bold py-2"
           >
             Cancel
@@ -47,8 +47,8 @@ const DeleteTweetModal = (props) => {
         </div>
       </div>
       <button
-        onClick={() => props.setIsOpen(false)}
-        className="fixed h-full w-full bg-black bg-opacity-40"
+        onClick={() => props.setIsDeleteTweetModalOpen(false)}
+        className="fixed h-full w-full bg-black bg-opacity-40 cursor-default"
       />
     </div>
   );

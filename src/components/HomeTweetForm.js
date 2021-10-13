@@ -59,7 +59,7 @@ const HomeTweetForm = (props) => {
           <img alt="avatar" src={props.authUser.avatar_url} />
         </div>
       </div>
-      <div className="flex flex-col pl-4  w-full pr-4">
+      <div className="flex flex-col pl-4 w-full pr-4">
         <div className="">
           <div
             name="content"

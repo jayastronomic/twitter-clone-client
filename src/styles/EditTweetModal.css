@@ -1,0 +1,8 @@
+.edit-tweet-modal {
+  width: 38rem;
+  height: fit-content;
+}
+
+.outer-edit-tweet-modal {
+  z-index: 10;
+}

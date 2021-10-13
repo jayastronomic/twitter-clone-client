@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/TweetCard.css";
 import { connect } from "react-redux";
 import { deleteLikeSuccess } from "../actions/likeActions";
 
@@ -44,7 +45,7 @@ const TweetCard = (props) => {
   };
 
   return (
-    <div className="flex border-gray-100 border-b pt-2 pl-2 pb-4 hover:bg-gray-100 transition ease-in-out cursor-pointer overflow-visible">
+    <div className="flex border-gray-100 border-b pt-2 pl-2 pb-4 hover:bg-gray-100 transition ease-in-out cursor-pointer overflow-visible w-auto">
       <div className="">
         {props.avatar_exist ? (
           <div className="relative rounded-full overflow-hidden flex items-center justify-center w-12 h-12 hover:bg-black">
@@ -56,15 +57,15 @@ const TweetCard = (props) => {
         )}
       </div>
       <div className="flex flex-col pl-4 w-full -space-y-2">
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <div className="flex space-x-0.5">
             <p className="font-semibold">{props.tweet_user_name}</p>
             <p className="text-gray-500">@{props.tweet_user_username}</p>
           </div>
-          <div className="relative pr-4">
+          <div className="relative pr-2">
             <i
               onClick={() => setIsOpen(!isOpen)}
-              className="transform translate-y-4 text-gray-400 fas fa-ellipsis-h hover:bg-blue-100 hover:text-blue-400 rounded-full p-2"
+              className="text-gray-400 fas fa-ellipsis-h hover:bg-blue-100 hover:text-blue-400 rounded-full p-2"
             ></i>
             {isOpen && (
               <button
@@ -75,14 +76,16 @@ const TweetCard = (props) => {
             {props.authUserId === props.user_id
               ? isOpen && (
                   <AuthUserTweetDropdown
-                    tweetId={props.id}
+                    tweet={props}
                     toggleAuthUserTweetDropdown={toggleAuthUserTweetDropdown}
                   />
                 )
               : isOpen && <UserTweetDropdown />}
           </div>
         </div>
-        <p className="break-words pb-2 whitespace-pre-wrap">{props.content}</p>
+        <p className="content break-words pb-2 whitespace-pre-wrap">
+          {props.content}
+        </p>
 
         <div className="pt-2 flex justify-between pr-20">
           <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-comment"></i>

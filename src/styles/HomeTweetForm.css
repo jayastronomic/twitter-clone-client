@@ -2,7 +2,7 @@
 }
 
 .textarea {
-  width: 32rem;
+  width: 31rem;
 }
 
 .textarea[contenteditable]:empty::before {
