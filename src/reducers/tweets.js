@@ -11,7 +11,7 @@ export default function tweets(state = [], action) {
     case "EDIT_TWEET_SUCCESS":
       const editedTweet = action.editedTweet;
       const updatedState = state.map((tweet) =>
-        tweet.id !== editedTweet.id ? tweet : editedTweet
+        tweet.id !== editedTweet.id ? tweet : { ...editedTweet }
       );
       return updatedState;
     default:
