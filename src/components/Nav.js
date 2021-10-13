@@ -12,7 +12,7 @@ const Nav = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="nav border-r h-screen flex flex-row-reverse">
+    <nav className="nav border-r border-gray-100 h-screen flex flex-row-reverse">
       <div className="flex flex-col pt-4 space-y-6 pr-14">
         <div>
           <i className="fab fa-twitter fa-2x twitter-blue hover:bg-blue-100 rounded-full transition p-4 cursor-pointer"></i>
@@ -20,65 +20,65 @@ const Nav = (props) => {
         <div>
           <Link
             to="/"
-            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
           >
-            <i className="fas fa-home"></i> Home
+            <i className="fas fa-home"></i>&nbsp;&nbsp;&nbsp; Home
           </Link>
         </div>
         <div>
           <Link
             to=""
-            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
           >
-            <i className="fas fa-hashtag"></i> Explore
+            <i className="fas fa-hashtag"></i>&nbsp;&nbsp;&nbsp; Explore
           </Link>
         </div>
         <div>
           <Link
             to=""
-            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
           >
-            <i className="far fa-bell"></i> Notifications
+            <i className="far fa-bell"></i>&nbsp;&nbsp;&nbsp; Notifications
           </Link>
         </div>
         <div>
           <Link
             to=""
-            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
           >
-            <i className="far fa-envelope"></i> Messages
+            <i className="far fa-envelope"></i>&nbsp;&nbsp;&nbsp; Messages
           </Link>
         </div>
         <div>
           <Link
             to=""
-            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
           >
-            <i className="far fa-bookmark"></i> Bookmarks
+            <i className="far fa-bookmark"></i>&nbsp;&nbsp;&nbsp; Bookmarks
           </Link>
         </div>
         <div>
           <Link
             to=""
-            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
           >
-            <i className="fas fa-bars"></i> Lists
+            <i className="fas fa-bars"></i>&nbsp;&nbsp;&nbsp; Lists
           </Link>
         </div>
         <div>
           <Link
             to={props.authUserHandle}
-            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
           >
-            <i className="far fa-user"></i> Profile
+            <i className="far fa-user"></i>&nbsp;&nbsp;&nbsp; Profile
           </Link>
         </div>
         <div>
           <Link
             to=""
-            className="text-xl hover:bg-gray-200 py-2 px-6 rounded-full transition"
+            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
           >
-            <i className="far fa-comment-dots"></i> More
+            <i className="far fa-comment-dots"></i>&nbsp;&nbsp;&nbsp; More
           </Link>
         </div>
 

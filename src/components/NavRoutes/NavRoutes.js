@@ -20,7 +20,7 @@ export const HomeNavRoute = ({
           history={props.history}
           authUser={authUser}
         />
-        <Component {...props} />
+        <Component authUser={authUser} {...props} />
         <Trends2 />
       </div>
     )}

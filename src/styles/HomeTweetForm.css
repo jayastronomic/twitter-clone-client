@@ -1,0 +1,11 @@
+.home-tweet-form {
+}
+
+.textarea {
+  width: 32rem;
+}
+
+.textarea[contenteditable]:empty::before {
+  content: "What's happenning?";
+  color: gray;
+}

@@ -15,6 +15,8 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import Connect from "./components/Connect";
 
+import HomeTweetForm from "./components/HomeTweetForm";
+
 import {
   fetchAuthUserSuccess,
   loggedIn,
@@ -95,6 +97,9 @@ class App extends Component {
           handleLogout={this.handleLogout}
           authUser={this.props.authUser}
         />
+        <Route exact path="/design">
+          <HomeTweetForm />
+        </Route>
       </Router>
     );
   }

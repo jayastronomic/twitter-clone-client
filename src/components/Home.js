@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "../styles/Home.css";
+import SparkleIcon from "./icons/Sparkle";
 
 import { connect } from "react-redux";
 import { fetchTweetsSuccess } from "../actions/tweetActions";
@@ -15,22 +16,28 @@ const Home = (props) => {
       .then((resObj) => {
         props.fetchTweetsSuccess(resObj);
       });
-  });
+  }, []);
 
   if (props.tweets.length > 0) {
     return (
-      <div className="home h-screen flex flex-col  ">
-        <div className="home-header font-bold text-xl border-b py-4 pl-2 ">
-          Home
+      <div className="home h-screen flex flex-col">
+        <div className="home-header flex justify-between font-bold text-xl border-gray-100 border-b py-4 pl-4">
+          <p className="block">Home</p>
+          <div className="pr-4">
+            <SparkleIcon />
+          </div>
         </div>
-        <TweetContainer tweets={props.tweets} />
+        <TweetContainer authUser={props.authUser} tweets={props.tweets} />
       </div>
     );
   } else {
     return (
       <div className="home h-screen flex flex-col">
-        <div className="font-bold text-xl border-b py-4 pl-2 sticky top-0">
-          Home
+        <div className="home-header flex justify-between font-bold text-xl border-gray-100 border-b py-4 pl-4">
+          <p className="block">Home</p>
+          <div className="pr-4">
+            <SparkleIcon />
+          </div>
         </div>
         <div className="flex justify-center items-center h-screen">
           <div className="text-3xl text-gray-400">There are no Tweets</div>

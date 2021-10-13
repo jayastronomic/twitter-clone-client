@@ -8,7 +8,7 @@ import TrendCard from "./TrendCard";
 const Trends2 = () => {
   const [isFocused, setIsFocused] = useState(false);
   return (
-    <div className="trends border-l h-screen overflow-auto">
+    <div className="trends border-gray-100 border-l h-screen overflow-auto">
       <div className="pl-8 trends-container">
         <div className="pt-1">
           {isFocused ? (

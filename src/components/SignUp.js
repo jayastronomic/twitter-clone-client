@@ -75,6 +75,7 @@ class SignUp extends Component {
               Sign up for Twitter {"   "}
             </pre>
             <input
+              type="email"
               onChange={this.handleChange}
               name="email"
               value={this.state.email}

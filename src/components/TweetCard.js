@@ -44,7 +44,7 @@ const TweetCard = (props) => {
   };
 
   return (
-    <div className="flex border-b pt-2 pl-2 pb-4 hover:bg-gray-100 transition ease-in-out cursor-pointer overflow-visible">
+    <div className="flex border-gray-100 border-b pt-2 pl-2 pb-4 hover:bg-gray-100 transition ease-in-out cursor-pointer overflow-visible">
       <div className="">
         {props.avatar_exist ? (
           <div className="relative rounded-full overflow-hidden flex items-center justify-center w-12 h-12 hover:bg-black">
@@ -82,7 +82,7 @@ const TweetCard = (props) => {
               : isOpen && <UserTweetDropdown />}
           </div>
         </div>
-        <p className="break-words pb-2">{props.content}</p>
+        <p className="break-words pb-2 whitespace-pre-wrap">{props.content}</p>
 
         <div className="pt-2 flex justify-between pr-20">
           <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-comment"></i>
