@@ -14,14 +14,20 @@ const ProfileInformation = (props) => {
     <div className="profile-information flex flex-col-reverse bg-cover ">
       <div className="flex flex-col-reverse bg-white profile-information-details">
         <div className="flex pb-4 pl-4 space-x-4">
-          <p>
+          <Link
+            to={`/${props.authUser.username}/following`}
+            className="hover:underline"
+          >
             <span className="font-bold">{props.authUser.followings}</span>{" "}
             <span className="text-gray-500">Following</span>
-          </p>
-          <p>
+          </Link>
+          <Link
+            to={`/${props.authUser.username}/followers`}
+            className="hover:underline"
+          >
             <span className="font-bold">{props.authUser.followers}</span>{" "}
             <span className="text-gray-500">Followers</span>
-          </p>
+          </Link>
         </div>
 
         <div className="pl-4 flex">

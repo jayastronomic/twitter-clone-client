@@ -7,6 +7,8 @@ import toggleEditProfileModal from "./toggleEditProfileModal";
 import authUserTweets from "./authUserTweets";
 import authUserLikes from "./authUserLikes";
 import authUserTweetCount from "./authUserTweetCount";
+import authUserFollowers from "./authUserFollowers";
+import authUserFollowings from "./authUserFollowings";
 
 export default combineReducers({
   authUser,
@@ -17,4 +19,6 @@ export default combineReducers({
   authUserTweets,
   authUserLikes,
   authUserTweetCount,
+  authUserFollowers,
+  authUserFollowings,
 });

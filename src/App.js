@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   HomeNavRoute,
   ProfileNavRoute,
   ConnectNavRoute,
+  AuthUserConnectsNavRoute,
 } from "./components/NavRoutes/NavRoutes";
 
 import SignUp from "./components/SignUp";
@@ -14,8 +15,7 @@ import Logout from "./components/Logout";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import Connect from "./components/Connect";
-
-import HomeTweetForm from "./components/HomeTweetForm";
+import AuthUserConnects from "./components/AuthUserConnects";
 
 import {
   fetchAuthUserSuccess,
@@ -55,51 +55,67 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <HomeNavRoute
-          exact
-          path="/"
-          component={Home}
-          handleLogout={this.handleLogout}
-          authUser={this.props.authUser}
-        />
-        <Route
-          exact
-          path="/signup"
-          render={(props) => (
-            <SignUp history={props.history} handleLogin={this.handleLogin} />
-          )}
-        />
-        <Route
-          exact
-          path="/login"
-          render={(props) => (
-            <Login history={props.history} handleLogin={this.handleLogin} />
-          )}
-        />
-        <Route
-          exact
-          path="/logout"
-          render={(props) => (
-            <Logout history={props.history} handleLogout={this.handleLogout} />
-          )}
-        />
+        <Switch>
+          <HomeNavRoute
+            exact
+            path="/"
+            component={Home}
+            handleLogout={this.handleLogout}
+            authUser={this.props.authUser}
+          />
+          <Route
+            exact
+            path="/signup"
+            render={(props) => (
+              <SignUp history={props.history} handleLogin={this.handleLogin} />
+            )}
+          />
+          <Route
+            exact
+            path="/login"
+            render={(props) => (
+              <Login history={props.history} handleLogin={this.handleLogin} />
+            )}
+          />
+          <Route
+            exact
+            path="/logout"
+            render={(props) => (
+              <Logout
+                history={props.history}
+                handleLogout={this.handleLogout}
+              />
+            )}
+          />
+          <ProfileNavRoute
+            exact
+            path={`/${this.props.authUser.username}`}
+            component={Profile}
+            handleLogout={this.handleLogout}
+            authUser={this.props.authUser}
+          />
+          <AuthUserConnectsNavRoute
+            exact
+            path={`/${this.props.authUser.username}/followers`}
+            component={AuthUserConnects}
+            handleLogout={this.handleLogout}
+            authUser={this.props.authUser}
+          />
+          <AuthUserConnectsNavRoute
+            exact
+            path={`/${this.props.authUser.username}/following`}
+            component={AuthUserConnects}
+            handleLogout={this.handleLogout}
+            authUser={this.props.authUser}
+          />
 
-        <ProfileNavRoute
-          path={`/${this.props.authUser.username}`}
-          component={Profile}
-          handleLogout={this.handleLogout}
-          authUser={this.props.authUser}
-        />
-
-        <ConnectNavRoute
-          path={"/connect"}
-          component={Connect}
-          handleLogout={this.handleLogout}
-          authUser={this.props.authUser}
-        />
-        <Route exact path="/design">
-          <HomeTweetForm />
-        </Route>
+          <ConnectNavRoute
+            path={"/connect"}
+            component={Connect}
+            handleLogout={this.handleLogout}
+            authUser={this.props.authUser}
+          />
+        </Switch>
       </Router>
     );
   }

@@ -25,3 +25,17 @@ export const updateAuthUserSuccess = (obj) => {
     updatedAuthUser: obj,
   };
 };
+
+export const fetchAuthUserFollowersSuccess = (arr) => {
+  return {
+    type: "FETCH_AUTH_USER_FOLLOWERS_SUCCESS",
+    authUserFollowers: arr,
+  };
+};
+
+export const fetchAuthUserFollowingsSuccess = (arr) => {
+  return {
+    type: "FETCH_AUTH_USER_FOLLOWINGS_SUCCESS",
+    authUserFollowings: arr,
+  };
+};
