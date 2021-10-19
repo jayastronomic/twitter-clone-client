@@ -27,7 +27,11 @@ const Home = (props) => {
             <SparkleIcon />
           </div>
         </div>
-        <TweetContainer authUser={props.authUser} tweets={props.tweets} />
+        <TweetContainer
+          authUser={props.authUser}
+          tweets={props.tweets}
+          location={props.location}
+        />
       </div>
     );
   } else {

@@ -19,7 +19,12 @@ class UserTweets extends Component {
   }
   render() {
     if (this.props.authUserTweets.length > 0) {
-      return <UserTweetContainer tweets={this.props.authUserTweets} />;
+      return (
+        <UserTweetContainer
+          location={this.props.location}
+          tweets={this.props.authUserTweets}
+        />
+      );
     } else {
       return (
         <div className="flex justify-center items-center h-96">

@@ -7,6 +7,7 @@ import {
   ProfileNavRoute,
   ConnectNavRoute,
   AuthUserConnectsNavRoute,
+  TweetNavRoute,
 } from "./components/NavRoutes/NavRoutes";
 
 import SignUp from "./components/SignUp";
@@ -16,6 +17,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import Connect from "./components/Connect";
 import AuthUserConnects from "./components/AuthUserConnects";
+import Tweet from "./components/Tweet";
 
 import {
   fetchAuthUserSuccess,
@@ -87,10 +89,10 @@ class App extends Component {
               />
             )}
           />
-          <ProfileNavRoute
+          <TweetNavRoute
             exact
-            path={`/${this.props.authUser.username}`}
-            component={Profile}
+            path={"/:usersame/status/:tweet_id"}
+            component={Tweet}
             handleLogout={this.handleLogout}
             authUser={this.props.authUser}
           />
@@ -108,7 +110,12 @@ class App extends Component {
             handleLogout={this.handleLogout}
             authUser={this.props.authUser}
           />
-
+          <ProfileNavRoute
+            path={`/${this.props.authUser.username}`}
+            component={Profile}
+            handleLogout={this.handleLogout}
+            authUser={this.props.authUser}
+          />
           <ConnectNavRoute
             path={"/connect"}
             component={Connect}

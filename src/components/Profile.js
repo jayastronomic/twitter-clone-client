@@ -36,7 +36,7 @@ const Profile = (props) => {
       <ProfileNav url={url} />
       <Switch>
         <Route exact path={path}>
-          <UserTweets authUser={props.authUser} />
+          <UserTweets location={props.location} authUser={props.authUser} />
         </Route>
         <Route path={`${path}/with_replies`}>
           <UserTweetsAndReplies />
@@ -45,7 +45,7 @@ const Profile = (props) => {
           <UserMedia />
         </Route>
         <Route path={`${path}/likes`}>
-          <UserLikes />
+          <UserLikes location={props.location} />
         </Route>
       </Switch>
     </div>

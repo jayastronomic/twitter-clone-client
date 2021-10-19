@@ -28,7 +28,6 @@ export const HomeNavRoute = ({
 );
 
 export const ProfileNavRoute = ({
-  exact,
   path,
   component: Component,
   handleLogout,
@@ -74,6 +73,30 @@ export const ConnectNavRoute = ({
 );
 
 export const AuthUserConnectsNavRoute = ({
+  exact,
+  path,
+  component: Component,
+  handleLogout,
+  authUser,
+}) => (
+  <Route
+    exact={exact}
+    path={path}
+    render={(props) => (
+      <div className="flex">
+        <Nav
+          handleLogout={handleLogout}
+          history={props.history}
+          authUser={authUser}
+        />
+        <Component {...props} authUser={authUser} />
+        <Trends2 />
+      </div>
+    )}
+  />
+);
+
+export const TweetNavRoute = ({
   exact,
   path,
   component: Component,

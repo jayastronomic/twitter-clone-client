@@ -17,7 +17,12 @@ const UserLikes = (props) => {
   });
 
   if (props.authUserLikes.length > 0) {
-    return <UserLikesContainer userLikes={props.authUserLikes} />;
+    return (
+      <UserLikesContainer
+        location={props.location}
+        userLikes={props.authUserLikes}
+      />
+    );
   } else {
     return (
       <div className="flex justify-center items-center h-96">

@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { useRouteMatch, useHistory } from "react-router";
+
 import {
   deleteTweetSuccess,
   deleteAuthUserTweetSuccess,
@@ -9,6 +11,13 @@ import {
 const API = "http://localhost:3002/api/v1/tweets";
 
 const DeleteTweetModal = (props) => {
+  const { path } = useRouteMatch();
+  const history = useHistory();
+
+  const redirect = () => {
+    history.push("/");
+  };
+
   const deleteTweet = () => {
     fetch(API + `/${props.tweetId}`, {
       method: "DELETE",
@@ -21,6 +30,10 @@ const DeleteTweetModal = (props) => {
           props.deleteAuthUserTweetSuccess(resObj);
         }
       });
+
+    if (path === "/:usersame/status/:tweet_id") {
+      redirect();
+    }
   };
   return (
     <div className="inset-0 fixed flex items-center justify-center">
