@@ -11,3 +11,10 @@ export const deleteLikeSuccess = (obj) => {
     deletedLikedTweet: obj,
   };
 };
+
+export const createLikeSuccess = (obj) => {
+  return {
+    type: "CREATE_LIKE_SUCCESS",
+    createdLikedTweet: obj,
+  };
+};

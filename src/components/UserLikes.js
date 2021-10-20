@@ -14,7 +14,7 @@ const UserLikes = (props) => {
       .then((resObj) => {
         props.fetchAuthUserLikesSuccess(resObj);
       });
-  });
+  }, []);
 
   if (props.authUserLikes.length > 0) {
     return (

@@ -1,7 +1,11 @@
 export default function authUserLikes(state = [], action) {
   switch (action.type) {
     case "FETCH_AUTH_USER_LIKES_SUCCESS":
-      return action.authUserLikes;
+      const liked_tweets = action.authUserLikes.map((like) => {
+        return like.tweet;
+      });
+      console.log(liked_tweets);
+      return liked_tweets;
     case "DELETE_LIKE_SUCCESS":
       const deletedLikedTweet = action.deletedLikedTweet;
       return state.filter(

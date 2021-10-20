@@ -159,6 +159,7 @@ class EditProfleModal extends Component {
                 Website
               </div>
               <input
+                type="url"
                 onChange={this.handleChange}
                 name="website"
                 value={this.state.website}

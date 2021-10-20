@@ -11,17 +11,8 @@ import UserTweetDropdown from "./UserTweetDropdown";
 const API = "http://localhost:3002/api/v1/users";
 
 const TweetCard = (props) => {
-  const tweetProps = () => {
-    const tweetState = {};
-    for (const [key, val] of Object.entries(props)) {
-      if (typeof val !== "function") {
-        Object.assign(tweetState, { [key]: val });
-      }
-    }
-    return tweetState;
-  };
-  tweetProps();
-  const [like, setLike] = useState(props.liked_by_current_user);
+  const [edited, setEdited] = useState(props.edited);
+  const [liked, setLiked] = useState(props.liked_by_current_user);
   const [isOpen, setIsOpen] = useState(false);
   const link = useRef();
   const likeTweet = () => {
@@ -45,12 +36,16 @@ const TweetCard = (props) => {
       .then((resp) => resp.json())
       .then((resObj) => {
         if (resObj.created) {
-          setLike(!like);
+          toggleLiked();
         } else {
           props.deleteLikeSuccess(resObj.tweet);
-          setLike(!like);
+          toggleLiked();
         }
       });
+  };
+
+  const toggleLiked = () => {
+    setLiked(!liked);
   };
 
   const toggleAuthUserTweetDropdown = () => {
@@ -63,9 +58,11 @@ const TweetCard = (props) => {
     }
     link.current.click();
   };
+
   if (
     props.location.pathname === "/" ||
-    props.location.pathname === `/${props.tweet_user_username}`
+    props.location.pathname === `/${props.tweet_user_username}` ||
+    props.location.pathname === `/${props.tweet_user_username}/likes`
   ) {
     return (
       <div
@@ -90,11 +87,17 @@ const TweetCard = (props) => {
             onClick={(e) => goToTweet(e)}
             className="flex justify-between items-center"
           >
-            <div onClick={(e) => goToTweet(e)} className="flex space-x-0.5">
+            <div
+              onClick={(e) => goToTweet(e)}
+              className="flex items-center space-x-0.5"
+            >
               <p className="font-semibold hover:underline">
                 {props.tweet_user_name}
               </p>
               <p className="text-gray-500">@{props.tweet_user_username}</p>
+              {edited ? (
+                <p className="text-xs pl-2 text-gray-400">{"(edited)"}</p>
+              ) : null}
             </div>
             <div onClick={(e) => goToTweet(e)} className="relative pr-2">
               <i
@@ -111,7 +114,9 @@ const TweetCard = (props) => {
                 ? isOpen && (
                     <AuthUserTweetDropdown
                       tweet={props}
+                      setEdited={setEdited}
                       toggleAuthUserTweetDropdown={toggleAuthUserTweetDropdown}
+                      location={props.location}
                     />
                   )
                 : isOpen && <UserTweetDropdown />}
@@ -130,7 +135,7 @@ const TweetCard = (props) => {
           >
             <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-comment"></i>
             <i className="cursor-pointer transition hover:bg-green-100 p-2 rounded-full hover:text-green-400 fas fa-retweet"></i>
-            {like ? (
+            {liked ? (
               <i
                 className="cursor-pointer transition hover:bg-red-100 p-2 rounded-full text-red-400 fas fa-heart "
                 onClick={() => likeTweet()}
@@ -148,7 +153,9 @@ const TweetCard = (props) => {
           ref={link}
           to={{
             pathname: `/${props.tweet_user_username}/status/${props.id}`,
-            state: tweetProps(),
+            state: {
+              tweetId: props.id,
+            },
           }}
         />
       </div>
@@ -159,25 +166,19 @@ const TweetCard = (props) => {
         <div className="flex flex-col pl-2 pr-4 w-full -space-y-2">
           <div className="flex justify-between items-center">
             <div className="flex">
-              {props.location.state.avatar_exist ? (
+              {props.avatar_exist ? (
                 <div className="relative rounded-full overflow-hidden flex items-center justify-center w-12 h-12 hover:bg-black">
                   <div className="absolute rounded-full flex w-12 h-12 hover:bg-black opacity-20 transition"></div>
-                  <img
-                    className=""
-                    alt="avatar"
-                    src={props.location.state.avatar_url}
-                  />
+                  <img className="" alt="avatar" src={props.avatar_url} />
                 </div>
               ) : (
                 <i className="fas fa-user-circle fa-3x text-gray-300"></i>
               )}
               <div className="flex flex-col -space-y-1 pl-2">
                 <p className="font-bold hover:underline text-sm">
-                  {props.location.state.tweet_user_name}
+                  {props.tweet_user_name}
                 </p>
-                <p className="text-gray-500">
-                  @{props.location.state.tweet_user_username}
-                </p>
+                <p className="text-gray-500">@{props.tweet_user_username}</p>
               </div>
             </div>
             <div className="relative pr-2">
@@ -191,11 +192,13 @@ const TweetCard = (props) => {
                   onClick={() => setIsOpen(false)}
                 />
               )}
-              {props.authUserId === props.location.state.user_id
+              {props.authUserId === props.user_id
                 ? isOpen && (
                     <AuthUserTweetDropdown
-                      tweet={props.location.state}
+                      tweet={props}
                       toggleAuthUserTweetDropdown={toggleAuthUserTweetDropdown}
+                      updateTweetContent={props.updateTweetContent}
+                      location={props.location}
                     />
                   )
                 : isOpen && <UserTweetDropdown />}
@@ -203,16 +206,19 @@ const TweetCard = (props) => {
           </div>
 
           <p className="pt-5 pb-5 text-2xl break-words pb-2 whitespace-pre-wrap">
-            {props.location.state.content}
+            {props.tweetContent}
           </p>
 
           <div className="flex text-gray-500 border-gray-100 pb-5 text-sm">
-            <p>{props.location.state.time_created}</p>&nbsp;·&nbsp;
-            <p>{props.location.state.date_created}</p>&nbsp;·&nbsp;
+            <p>{props.time_created}</p>&nbsp;·&nbsp;
+            <p>{props.date_created}</p>&nbsp;·&nbsp;
             <p className="hover:underline">Twitter Web App</p>
           </div>
 
-          <Link className="transition hover:bg-gray-100 border-b border-t border-gray-100 py-4 text-gray-500 flex items-center pl-1">
+          <Link
+            to={""}
+            className="transition hover:bg-gray-100 border-b border-t border-gray-100 py-4 text-gray-500 flex items-center pl-1"
+          >
             <i className="fa fa-chart-bar" />
             &nbsp;
             <p className="text-sm">View Tweet Activity</p>
@@ -221,15 +227,21 @@ const TweetCard = (props) => {
           <div className="pt-5 flex justify-around">
             <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-comment"></i>
             <i className="cursor-pointer transition hover:bg-green-100 p-2 rounded-full hover:text-green-400 fas fa-retweet"></i>
-            {like ? (
+            {props.liked ? (
               <i
                 className="cursor-pointer transition hover:bg-red-100 p-2 rounded-full text-red-400 fas fa-heart "
-                onClick={() => likeTweet()}
+                onClick={() => {
+                  likeTweet();
+                  props.toggleLike();
+                }}
               />
             ) : (
               <i
                 className="cursor-pointer transition hover:bg-red-100 p-2 rounded-full hover:text-red-400 far fa-heart"
-                onClick={() => likeTweet()}
+                onClick={() => {
+                  likeTweet();
+                  props.toggleLike();
+                }}
               />
             )}
             <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-share-square"></i>

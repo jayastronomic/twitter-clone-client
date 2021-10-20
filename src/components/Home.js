@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { fetchTweetsSuccess } from "../actions/tweetActions";
 
 import TweetContainer from "../containers/TweetContainer";
+import HomeTweetForm from "./HomeTweetForm";
 
 const API = "http://localhost:3002/api/v1/tweets";
 
@@ -43,6 +44,7 @@ const Home = (props) => {
             <SparkleIcon />
           </div>
         </div>
+        <HomeTweetForm authUser={props.authUser} />
         <div className="flex justify-center items-center h-screen">
           <div className="text-3xl text-gray-400">There are no Tweets</div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Nav.css";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import TweetModal from "./TweetModal";
@@ -10,76 +10,77 @@ import { toggle } from "../actions/tweetModalActions";
 
 const Nav = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { url } = useRouteMatch();
 
   return (
     <nav className="nav border-r border-gray-100 h-screen flex flex-row-reverse">
-      <div className="flex flex-col pt-4 space-y-6 pr-14">
+      <div className="flex flex-col  space-y-6 pr-14">
         <div>
           <i className="fab fa-twitter fa-2x twitter-blue hover:bg-blue-100 rounded-full transition p-4 cursor-pointer"></i>
         </div>
         <div>
-          <Link
-            to="/"
-            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
-          >
-            <i className="fas fa-home"></i>&nbsp;&nbsp;&nbsp; Home
-          </Link>
+          {url === "/" ? (
+            <Link
+              to="/"
+              className="text-xl font-bold hover:bg-gray-200 py-4 px-4 rounded-full transition"
+            >
+              <i className="fas fa-home"></i>&nbsp;&nbsp;&nbsp; Home
+            </Link>
+          ) : (
+            <Link
+              to="/"
+              className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
+            >
+              <i className="fas fa-home"></i>&nbsp;&nbsp;&nbsp; Home
+            </Link>
+          )}
         </div>
         <div>
-          <Link
-            to=""
-            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
-          >
+          <div className="inline text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition">
             <i className="fas fa-hashtag"></i>&nbsp;&nbsp;&nbsp; Explore
-          </Link>
+          </div>
         </div>
         <div>
-          <Link
-            to=""
-            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
-          >
+          <div className="inline text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition">
             <i className="far fa-bell"></i>&nbsp;&nbsp;&nbsp; Notifications
-          </Link>
+          </div>
         </div>
         <div>
-          <Link
-            to=""
-            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
-          >
+          <div className="inline text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition">
             <i className="far fa-envelope"></i>&nbsp;&nbsp;&nbsp; Messages
-          </Link>
+          </div>
         </div>
         <div>
-          <Link
-            to=""
-            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
-          >
+          <div className="inline text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition">
             <i className="far fa-bookmark"></i>&nbsp;&nbsp;&nbsp; Bookmarks
-          </Link>
+          </div>
         </div>
         <div>
-          <Link
-            to=""
-            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
-          >
+          <div className="inline text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition">
             <i className="fas fa-bars"></i>&nbsp;&nbsp;&nbsp; Lists
-          </Link>
+          </div>
         </div>
         <div>
-          <Link
-            to={props.authUserHandle}
-            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
-          >
-            <i className="far fa-user"></i>&nbsp;&nbsp;&nbsp; Profile
-          </Link>
+          {url === `${props.authUserHandle}` ? (
+            <Link
+              to={props.authUserHandle}
+              className="text-xl font-bold hover:bg-gray-200 py-4 px-4 rounded-full transition"
+            >
+              <i className="far fa-user"></i>&nbsp;&nbsp;&nbsp; Profile
+            </Link>
+          ) : (
+            <Link
+              to={props.authUserHandle}
+              className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
+            >
+              <i className="far fa-user"></i>&nbsp;&nbsp;&nbsp; Profile
+            </Link>
+          )}
         </div>
         <div>
-          <Link
-            to=""
-            className="text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition"
-          >
+          <div className="inline text-xl hover:bg-gray-200 py-4 px-4 rounded-full transition">
             <i className="far fa-comment-dots"></i>&nbsp;&nbsp;&nbsp; More
-          </Link>
+          </div>
         </div>
 
         <button

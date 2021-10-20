@@ -43,8 +43,11 @@ const AuthUserTweetDropdown = (props) => {
       )}
       {isEditTweetModalOpen && (
         <EditTweetModal
+          updateTweetContent={props.updateTweetContent}
           tweet={props.tweet}
           setIsEditTweetModalOpen={setIsEditTweetModalOpen}
+          location={props.location}
+          setEdited={props.setEdited}
         />
       )}
     </div>

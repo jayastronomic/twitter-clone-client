@@ -16,7 +16,7 @@ const AuthUserFollowers = (props) => {
     return (
       <ConnectContainer
         users={props.authUserFollowers}
-        authuser={props.authUser}
+        authUser={props.authUser}
       />
     );
   } else {

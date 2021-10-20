@@ -45,12 +45,20 @@ class EditTweetModal extends Component {
       .then((resObj) => {
         this.props.editTweetSuccess(resObj);
         this.props.editAuthUserTweetSuccess(resObj);
+        this.props.setEdited(true);
+        if (
+          this.props.location.pathname ===
+          `/${this.props.authUser.username}/status/${this.props.tweet.id}`
+        ) {
+          this.props.updateTweetContent(resObj);
+        }
       });
 
     this.props.setIsEditTweetModalOpen(false);
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className="outer-edit-tweet-modal fixed inset-0 flex flex-col items-center">
         <div className="pt-10"></div>
