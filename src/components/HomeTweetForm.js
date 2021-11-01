@@ -55,9 +55,13 @@ const HomeTweetForm = (props) => {
       className="home-tweet-form flex border-b border-gray-100"
     >
       <div className="pl-4 pt-2">
-        <div className="rounded-full overflow-hidden w-12">
-          <img alt="avatar" src={props.authUser.avatar_url} />
-        </div>
+        {props.authUser.avatar_exist ? (
+          <div className="rounded-full overflow-hidden w-12">
+            <img alt="avatar" src={props.authUser.avatar_url} />
+          </div>
+        ) : (
+          <i className="fas fa-user-circle fa-3x text-gray-300" />
+        )}
       </div>
       <div className="flex flex-col pl-4 w-full pr-4">
         <div className="">

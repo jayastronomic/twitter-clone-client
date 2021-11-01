@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import "../styles/EditProfileModal.css";
 import { connect } from "react-redux";
 
-import { toggleEditProfileModal } from "../actions/editProfileModalActions";
-
 import { updateAuthUserSuccess } from "../actions/userActions";
 
 const API = "http://localhost:3002/api/v1/users/";
@@ -18,6 +16,7 @@ class EditProfleModal extends Component {
       location: this.props.authUser.location,
       website: this.props.authUser.website,
       avatarUrl: this.props.authUser.avatar_url,
+      selectedAviFile: null,
     };
   }
 
@@ -50,24 +49,49 @@ class EditProfleModal extends Component {
       .then((resp) => resp.json())
       .then((resObj) => this.props.updateAuthUserSuccess(resObj));
 
-    this.props.toggleEditProfileModal(!this.props.showEditProfileModal);
+    this.props.setIsOpen(false);
   };
 
-  uploadPhoto = () => {
+  uploadPhoto = (e) => {
+    e.preventDefault();
     this.inputRef.current.click();
   };
 
+  fileSelectorHandler = (e) => {
+    this.setState({
+      selectedAviFile: e.target.files[0],
+    });
+  };
+
+  // fileUploadHandler = () => {
+  //   const user = {
+  //     avatar: this.state.selectedAviFile,
+  //   };
+
+  //   const payload = {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(user),
+  //     credentials: "include",
+  //   };
+  //   fetch(API + `${this.props.authUser.id}/update_avi`, payload)
+  //     .then((resp) => resp.json())
+  //     .then((resObj) => console.log(resObj));
+  // };
+
   render() {
     return (
-      <div className="edit-profile-modal flex absolute inset-0 bg-black bg-opacity-50 justify-center items-center">
+      <div className="z-10 flex fixed inset-0 justify-center items-center">
         <form
           onSubmit={this.handleSubmit}
-          className="edit-profile-form bg-white rounded-2xl "
+          className="edit-profile-form bg-white rounded-2xl z-20"
         >
           <div className="flex justify-between border-b p-4">
             <div className="flex items-center space-x-10">
               <button
-                onClick={() => this.props.toggleEditProfileModal()}
+                onClick={() => this.props.setIsOpen(false)}
                 className="fas fa-times w-8 h-8 hover:bg-gray-200 rounded-full"
               ></button>
               <p className="font-bold text-xl"> Edit Profile</p>
@@ -92,11 +116,13 @@ class EditProfleModal extends Component {
                   alt="avatar"
                   src={this.state.avatarUrl}
                 />
+                <div className="bg-black w-28 h-28 absolute bg-opacity-40"></div>
                 <button
-                  onClick={() => this.uploadPhoto()}
-                  className="absolute fas fa-camera text-2xl text-black opacity-50 cursor-pointer"
+                  onClick={(e) => this.uploadPhoto(e)}
+                  className="text-white absolute fa fa-camera text-2xl opacity-60 cursor-pointer h-12 w-12 transition hover:bg-white hover:bg-opacity-20 rounded-full"
                 />
                 <input
+                  onChange={(e) => this.fileSelectorHandler(e)}
                   className="absolute hidden"
                   id="avatar"
                   name="avatar"
@@ -130,11 +156,11 @@ class EditProfleModal extends Component {
               <div className="rounded-t border-gray-300 border-l border-r border-t text-sm pl-2 pt-2">
                 Bio
               </div>
-              <input
+              <textarea
                 onChange={this.handleChange}
                 name="bio"
                 value={this.state.bio}
-                className="rounded-b border-gray-300 focus:outline-none border-b border-l border-r p-2"
+                className="h-12 resize-none rounded-b border-gray-300 focus:outline-none border-b border-l border-r p-2"
               />
             </div>
           </div>
@@ -168,19 +194,17 @@ class EditProfleModal extends Component {
             </div>
           </div>
         </form>
+        <button
+          onClick={() => this.props.setIsOpen(false)}
+          className="bg-black bg-opacity-50 fixed h-full w-full cursor-default"
+        />
       </div>
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    showEditProfileModal: state.toggleEditProfileModal,
-  };
-};
 
 const mapDispatchToProps = {
-  toggleEditProfileModal,
   updateAuthUserSuccess,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditProfleModal);
+export default connect(null, mapDispatchToProps)(EditProfleModal);

@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 
 import EditProfleModal from "./EditProfileModal";
 
-import { toggleEditProfileModal } from "../actions/editProfileModalActions";
-
 const ProfileInformation = (props) => {
   return (
     <div className="profile-information flex flex-col-reverse bg-cover ">
@@ -50,8 +48,11 @@ const ProfileInformation = (props) => {
             {props.authUser.month_joined} {props.authUser.year_joined}
           </div>
         </div>
+        {/* <div className="pl-4 pb-2">
+          <p>{props.authUser.bio}</p>
+        </div> */}
 
-        <div className="pl-4 pb-2">
+        <div className="pl-4 pb-4">
           {props.authUser.name && (
             <p className="font-bold text-xl">{props.authUser.name}</p>
           )}
@@ -83,14 +84,4 @@ const ProfileInformation = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    showEditProfileModal: state.toggleEditProfileModal,
-  };
-};
-
-const mapDispatchToProps = {
-  toggleEditProfileModal,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileInformation);
+export default connect(null, mapDispatchToProps)(ProfileInformation);

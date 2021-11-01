@@ -96,7 +96,7 @@ const TweetCard = (props) => {
               </p>
               <p className="text-gray-500">@{props.tweet_user_username}</p>
               {edited ? (
-                <p className="text-xs pl-2 text-gray-400">{"(edited)"}</p>
+                <p className="text-sm text-gray-400">{" · (edited)"}</p>
               ) : null}
             </div>
             <div onClick={(e) => goToTweet(e)} className="relative pr-2">

@@ -27,8 +27,8 @@ class UserTweets extends Component {
       );
     } else {
       return (
-        <div className="flex justify-center items-center h-96">
-          <h1 className="text-2xl text-gray-400">You have no tweets</h1>
+        <div className="flex justify-center items-center h-auto pt-20">
+          <h1 className="text-3xl text-gray-400">You have no tweets</h1>
         </div>
       );
     }

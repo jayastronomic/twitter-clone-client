@@ -97,9 +97,13 @@ const Nav = (props) => {
           onClick={() => setIsOpen(true)}
           className="relative flex rounded-full hover:bg-gray-200 pl-3 py-3 pr-10 items-center cursor-pointer transition"
         >
-          <div className="rounded-full overflow-hidden h-12 w-12">
-            <img alt="avatar object-cover" src={props.authUserAvatarUrl} />
-          </div>
+          {props.authUser.avatar_exist ? (
+            <div className="rounded-full overflow-hidden h-12 w-12">
+              <img alt="avatar object-cover" src={props.authUserAvatarUrl} />
+            </div>
+          ) : (
+            <i className="fa-3x fas fa-user-circle text-gray-300" />
+          )}
           <div className="flex flex-col pl-2">
             <p className="font-semibold">{props.authUserName}</p>
             <p className="text-gray-500">@{props.authUserUsername}</p>
@@ -110,7 +114,7 @@ const Nav = (props) => {
         {isOpen && (
           <button
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 bg-black h-full w-full z-50 bg-opacity-0"
+            className="fixed inset-0 h-full w-full z-10 cursor-default"
           />
         )}
       </div>

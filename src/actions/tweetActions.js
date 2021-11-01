@@ -52,6 +52,11 @@ export const addTweetCount = () => {
     type: "ADD_TWEET_COUNT",
   };
 };
+export const subTweetCount = () => {
+  return {
+    type: "SUB_TWEET_COUNT",
+  };
+};
 
 export const editTweetSuccess = (obj) => {
   return {

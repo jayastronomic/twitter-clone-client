@@ -6,6 +6,7 @@ import { useRouteMatch, useHistory } from "react-router";
 import {
   deleteTweetSuccess,
   deleteAuthUserTweetSuccess,
+  subTweetCount,
 } from "../actions/tweetActions";
 
 const API = "http://localhost:3002/api/v1/tweets";
@@ -14,11 +15,11 @@ const DeleteTweetModal = (props) => {
   const { path } = useRouteMatch();
   const history = useHistory();
 
-  const redirect = () => {
-    history.push("/");
+  const goBack = () => {
+    history.goBack();
   };
 
-  const deleteTweet = () => {
+  const deleteTweet = (e) => {
     fetch(API + `/${props.tweetId}`, {
       method: "DELETE",
       credentials: "include",
@@ -32,7 +33,7 @@ const DeleteTweetModal = (props) => {
       });
 
     if (path === "/:usersame/status/:tweet_id") {
-      redirect();
+      goBack();
     }
   };
   return (
@@ -46,7 +47,7 @@ const DeleteTweetModal = (props) => {
         </p>
         <div className="flex flex-col space-y-3 pt-4">
           <button
-            onClick={() => deleteTweet()}
+            onClick={(e) => deleteTweet(e)}
             className="bg-red-500 text-white font-bold rounded-full py-2"
           >
             Delete
@@ -70,6 +71,7 @@ const DeleteTweetModal = (props) => {
 const mapDispatchToProps = {
   deleteTweetSuccess,
   deleteAuthUserTweetSuccess,
+  subTweetCount,
 };
 
 export default connect(null, mapDispatchToProps)(DeleteTweetModal);

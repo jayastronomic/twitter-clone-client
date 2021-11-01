@@ -6,6 +6,9 @@ export default function authUserTweetCount(state = 0, action) {
     case "ADD_TWEET_COUNT":
       state = state + 1;
       return state;
+    case "SUB_TWEET_COUNT":
+      state = state - 1;
+      return state;
     default:
       return state;
   }

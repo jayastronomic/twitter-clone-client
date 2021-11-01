@@ -24,6 +24,7 @@ import {
   loggedIn,
   removeAuthUser,
 } from "./actions/userActions";
+import ProfileInformation2 from "./components/ProfileInformation2";
 
 const API = "http://localhost:3002/api/v1/logged_in";
 
@@ -122,6 +123,9 @@ class App extends Component {
             handleLogout={this.handleLogout}
             authUser={this.props.authUser}
           />
+          <Route exact path="/design">
+            <ProfileInformation2 />
+          </Route>
         </Switch>
       </Router>
     );

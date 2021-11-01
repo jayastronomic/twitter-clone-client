@@ -11,6 +11,7 @@ class SignUp extends Component {
     this.state = {
       email: "",
       username: "",
+      name: "",
       password: "",
       passwordConfirmation: "",
     };
@@ -33,6 +34,7 @@ class SignUp extends Component {
       user: {
         email: this.state.email,
         username: this.state.username,
+        name: this.state.name,
         password: this.state.password,
         password_confirmation: this.state.passwordConfirmation,
       },
@@ -49,11 +51,15 @@ class SignUp extends Component {
 
     fetch(API, payload)
       .then((resp) => resp.json())
-      .then((resObj) => this.props.handleLogin(resObj));
+      .then((resObj) => {
+        console.log(resObj);
+        this.props.handleLogin(resObj);
+      });
 
     this.setState({
       email: "",
       username: "",
+      name: "",
       password: "",
       passwordConfirmation: "",
     });
@@ -88,6 +94,13 @@ class SignUp extends Component {
               value={this.state.username}
               className="border-2 border-gray-300 rounded px-2 py-4 focus:border-blue-400 focus:outline-none"
               placeholder="Username"
+            />
+            <input
+              onChange={this.handleChange}
+              name="name"
+              value={this.state.name}
+              className="border-2 border-gray-300 rounded px-2 py-4 focus:border-blue-400 focus:outline-none"
+              placeholder="Name"
             />
             <input
               type="password"

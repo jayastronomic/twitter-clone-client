@@ -25,7 +25,7 @@ const UserLikes = (props) => {
     );
   } else {
     return (
-      <div className="flex justify-center items-center h-96">
+      <div className="flex justify-center items-center pt-20">
         <div className="text-gray-400 text-3xl">You have no likes</div>
       </div>
     );

@@ -3,8 +3,10 @@ import "../styles/Profile.css";
 import { connect } from "react-redux";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import ProfileInformation from "./ProfileInformation.js";
+import ProfileHeader from "./ProfileHeader";
+import ProfileInformation2 from "./ProfileInformation2.js";
 import ProfileNav from "./ProfilleNav";
+
 import UserTweets from "./UserTweets";
 import UserTweetsAndReplies from "./UserTweetsAndReplies";
 import UserMedia from "./UserMedia";
@@ -20,19 +22,12 @@ const Profile = (props) => {
 
   return (
     <div className="profile h-screen flex flex-col overflow-auto">
-      <div className="flex items-center profile-header sticky top-0  border-b py-2 pl-2 bg-white  ">
-        <div className="flex">
-          <button className="w-8 h-8 fas fa-long-arrow-alt-left hover:bg-gray-200 rounded-full" />
-        </div>
-        <div className="flex flex-col pl-10 -space-y-1.5">
-          <p className="font-bold text-xl">{props.authUser.name}</p>
-          <p className="text-sm text-gray-500">
-            {props.authUserTweetCount}{" "}
-            {props.authUserTweetCount === 1 ? "Tweet" : "Tweets"}
-          </p>
-        </div>
-      </div>
-      <ProfileInformation authUser={props.authUser} />
+      <ProfileHeader
+        history={props.history}
+        authUserTweetCount={props.authUserTweetCount}
+        authUser={props.authUser}
+      />
+      <ProfileInformation2 authUser={props.authUser} />
       <ProfileNav url={url} />
       <Switch>
         <Route exact path={path}>

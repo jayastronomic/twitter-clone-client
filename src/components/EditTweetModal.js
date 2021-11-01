@@ -58,7 +58,6 @@ class EditTweetModal extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className="outer-edit-tweet-modal fixed inset-0 flex flex-col items-center">
         <div className="pt-10"></div>

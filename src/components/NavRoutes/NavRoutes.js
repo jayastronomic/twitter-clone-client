@@ -42,7 +42,7 @@ export const ProfileNavRoute = ({
           history={props.history}
           authUser={authUser}
         />
-        <Component {...props} authUser={authUser} />
+        <Component history={props.history} {...props} authUser={authUser} />
         <Trends2 />
       </div>
     )}
