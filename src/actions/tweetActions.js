@@ -71,3 +71,10 @@ export const editAuthUserTweetSuccess = (obj) => {
     editedAuthUserTweet: obj,
   };
 };
+
+export const fetchUserTweetsSuccess = (arr) => {
+  return {
+    type: "FETCH_USER_TWEETS_SUCCESS",
+    userTweets: arr,
+  };
+};

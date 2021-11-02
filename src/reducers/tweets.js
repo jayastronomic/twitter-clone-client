@@ -1,7 +1,6 @@
 export default function tweets(state = [], action) {
   switch (action.type) {
     case "FETCH_TWEETS_SUCCESS":
-      console.log(action.tweets);
       if (action.tweets.length === 0) {
         return [];
       }

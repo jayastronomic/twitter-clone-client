@@ -51,10 +51,28 @@ const ConnectCard = (props) => {
               <i className="fas fa-user-circle fa-3x text-gray-300" />
             )}
           </div>
-          <div className="-space-y-2 pl-4">
-            <p className="font-medium">{props.user.name}</p>
+          <Link
+            to={{
+              pathname: `/${props.user.username}`,
+              state: {
+                user: props.user,
+              },
+            }}
+            className="-space-y-2 pl-4"
+          >
+            <Link
+              to={{
+                pathname: `/${props.user.username}`,
+                state: {
+                  user: props.user,
+                },
+              }}
+              className="font-medium hover:underline"
+            >
+              {props.user.name}
+            </Link>
             <p className="text-gray-500">@{props.user.username}</p>
-          </div>
+          </Link>
         </div>
         <div>
           {following ? (
@@ -74,9 +92,17 @@ const ConnectCard = (props) => {
           )}
         </div>
       </div>
-      <div className="pl-16 leading-tight">
+      <Link
+        to={{
+          pathname: `/${props.user.username}`,
+          state: {
+            user: props.user,
+          },
+        }}
+        className="pl-16 leading-tight"
+      >
         <div>{props.user.bio}</div>
-      </div>
+      </Link>
     </div>
   );
 };

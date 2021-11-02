@@ -4,27 +4,28 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   HomeNavRoute,
-  ProfileNavRoute,
+  AuthUserProfileNavRoute,
   ConnectNavRoute,
   AuthUserConnectsNavRoute,
   TweetNavRoute,
+  UserProfileNavRoute,
 } from "./components/NavRoutes/NavRoutes";
 
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Home from "./components/Home";
-import Profile from "./components/Profile";
+import AuthUserProfile from "./components/AuthUserProfile";
 import Connect from "./components/Connect";
 import AuthUserConnects from "./components/AuthUserConnects";
 import Tweet from "./components/Tweet";
+import UserProfile from "./components/UserProfile";
 
 import {
   fetchAuthUserSuccess,
   loggedIn,
   removeAuthUser,
 } from "./actions/userActions";
-import ProfileInformation2 from "./components/ProfileInformation2";
 
 const API = "http://localhost:3002/api/v1/logged_in";
 
@@ -111,21 +112,24 @@ class App extends Component {
             handleLogout={this.handleLogout}
             authUser={this.props.authUser}
           />
-          <ProfileNavRoute
-            path={`/${this.props.authUser.username}`}
-            component={Profile}
-            handleLogout={this.handleLogout}
-            authUser={this.props.authUser}
-          />
           <ConnectNavRoute
             path={"/connect"}
             component={Connect}
             handleLogout={this.handleLogout}
             authUser={this.props.authUser}
           />
-          <Route exact path="/design">
-            <ProfileInformation2 />
-          </Route>
+          <AuthUserProfileNavRoute
+            path={`/${this.props.authUser.username}`}
+            component={AuthUserProfile}
+            handleLogout={this.handleLogout}
+            authUser={this.props.authUser}
+          />
+          <UserProfileNavRoute
+            path={"/:username"}
+            component={UserProfile}
+            handleLogout={this.handleLogout}
+            authUser={this.props.authUser}
+          />
         </Switch>
       </Router>
     );

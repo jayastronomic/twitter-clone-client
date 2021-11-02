@@ -1,48 +1,39 @@
-import React, { Component } from "react";
-
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-
-import { fetchAuthUserTweetsSuccess } from "../actions/tweetActions";
 import UserTweetContainer from "../containers/UserTweetContainer";
+
+import { fetchUserTweetsSuccess } from "../actions/tweetActions";
 
 const API = "http://localhost:3002/api/v1/users/";
 
-class UserTweets extends Component {
-  componentDidMount() {
-    fetch(`${API}${this.props.authUser.id}/user_tweets`, {
-      credentials: "include",
-    })
+const UserTweets = (props) => {
+  useEffect(() => {
+    fetch(API + `${props.user.id}/user_tweets`, { credentials: "include" })
       .then((resp) => resp.json())
-      .then((resObj) => {
-        this.props.fetchAuthUserTweetsSuccess(resObj);
-      });
+      .then((resObj) => props.fetchUserTweetsSuccess(resObj));
+  }, []);
+  if (props.userTweets.length > 0) {
+    return (
+      <UserTweetContainer tweets={props.userTweets} location={props.location} />
+    );
+  } else {
+    return (
+      <div className="flex justify-center pt-20">
+        <h1 className="text-3xl text-gray-400">
+          {props.user.name} hasn't tweeted yet
+        </h1>
+      </div>
+    );
   }
-  render() {
-    if (this.props.authUserTweets.length > 0) {
-      return (
-        <UserTweetContainer
-          location={this.props.location}
-          tweets={this.props.authUserTweets}
-        />
-      );
-    } else {
-      return (
-        <div className="flex justify-center items-center h-auto pt-20">
-          <h1 className="text-3xl text-gray-400">You have no tweets</h1>
-        </div>
-      );
-    }
-  }
-}
-
+};
 const mapStateToProps = (state) => {
   return {
-    authUserTweets: state.authUserTweets,
+    userTweets: state.userTweets,
   };
 };
 
 const mapDispatchToProps = {
-  fetchAuthUserTweetsSuccess,
+  fetchUserTweetsSuccess,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserTweets);

@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserMedia = () => {
+const AuthUserMedia = () => {
   return (
     <div className="flex items-center justify-center  text-3xl text-gray-400 pt-20">
       <p>Media Feature Coming Soon</p>
@@ -8,4 +8,4 @@ const UserMedia = () => {
   );
 };
 
-export default UserMedia;
+export default AuthUserMedia;

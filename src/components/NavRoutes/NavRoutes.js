@@ -27,7 +27,7 @@ export const HomeNavRoute = ({
   />
 );
 
-export const ProfileNavRoute = ({
+export const AuthUserProfileNavRoute = ({
   path,
   component: Component,
   handleLogout,
@@ -114,6 +114,28 @@ export const TweetNavRoute = ({
           authUser={authUser}
         />
         <Component {...props} authUser={authUser} />
+        <Trends2 />
+      </div>
+    )}
+  />
+);
+
+export const UserProfileNavRoute = ({
+  path,
+  component: Component,
+  handleLogout,
+  authUser,
+}) => (
+  <Route
+    path={path}
+    render={(props) => (
+      <div className="flex">
+        <Nav
+          handleLogout={handleLogout}
+          history={props.history}
+          authUser={authUser}
+        />
+        <Component history={props.history} {...props} authUser={authUser} />
         <Trends2 />
       </div>
     )}

@@ -3,18 +3,17 @@ import "../styles/Profile.css";
 import { connect } from "react-redux";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import ProfileHeader from "./ProfileHeader";
-import ProfileInformation2 from "./ProfileInformation2.js";
-import ProfileNav from "./ProfilleNav";
-
-import UserTweets from "./UserTweets";
-import UserTweetsAndReplies from "./UserTweetsAndReplies";
-import UserMedia from "./UserMedia";
-import UserLikes from "./UserLikes";
+import AuthUserProfileHeader from "./AuthUserProfileHeader";
+import AuthUserProfileInformation from "./AuthUserProfileInformation.js";
+import AuthUserProfileNav from "./AuthUserProfileNav";
+import AuthUserTweets from "./AuthUserTweets";
+import AuthUserTweetsAndReplies from "./AuthUserTweetsAndReplies";
+import AuthUserMedia from "./AuthUserMedia";
+import AuthUserLikes from "./AuthUserLikes";
 
 import { loadAuthUserTweetCount } from "../actions/tweetActions";
 
-const Profile = (props) => {
+const AuthUserProfile = (props) => {
   useEffect(() => {
     props.loadAuthUserTweetCount(props.authUser.total_tweets);
   });
@@ -22,30 +21,34 @@ const Profile = (props) => {
 
   return (
     <div className="profile h-screen flex flex-col overflow-auto">
-      <ProfileHeader
+      <AuthUserProfileHeader
         history={props.history}
         authUserTweetCount={props.authUserTweetCount}
         authUser={props.authUser}
       />
-      <ProfileInformation2 authUser={props.authUser} />
-      <ProfileNav url={url} />
+      <AuthUserProfileInformation
+        authUser={props.authUser}
+        history={props.history}
+      />
+      <AuthUserProfileNav url={url} />
       <Switch>
         <Route exact path={path}>
-          <UserTweets location={props.location} authUser={props.authUser} />
+          <AuthUserTweets location={props.location} authUser={props.authUser} />
         </Route>
         <Route path={`${path}/with_replies`}>
-          <UserTweetsAndReplies />
+          <AuthUserTweetsAndReplies />
         </Route>
         <Route path={`${path}/media`}>
-          <UserMedia />
+          <AuthUserMedia />
         </Route>
         <Route path={`${path}/likes`}>
-          <UserLikes location={props.location} />
+          <AuthUserLikes location={props.location} />
         </Route>
       </Switch>
     </div>
   );
 };
+
 const mapStateToProps = (state) => {
   return {
     authUserTweetCount: state.authUserTweetCount,
@@ -56,4 +59,4 @@ const mapDispatchToProps = {
   loadAuthUserTweetCount,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthUserProfile);

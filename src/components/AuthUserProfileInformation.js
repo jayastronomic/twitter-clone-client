@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 
 import EditProfleModal from "./EditProfileModal";
 
-const ProfileInformation2 = (props) => {
+const AuthUserProfileInformation = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="relative profile-information-two flex flex-col">
       {props.authUser.background_exist ? (
@@ -75,14 +76,16 @@ const ProfileInformation2 = (props) => {
             to={`/${props.authUser.username}/following`}
             className="hover:underline"
           >
-            <span className="font-bold">{props.authUser.followings}</span>&nbsp;
+            <span className="font-bold">{props.authUser.followings}</span>
+            &nbsp;
             <span className="text-gray-500">Following</span>
           </Link>
           <Link
             to={`/${props.authUser.username}/followers`}
             className="hover:underline"
           >
-            <span className="font-bold">{props.authUser.followers}</span>&nbsp;
+            <span className="font-bold">{props.authUser.followers}</span>
+            &nbsp;
             <span className="text-gray-500">Followers</span>
           </Link>
         </div>
@@ -94,4 +97,4 @@ const ProfileInformation2 = (props) => {
   );
 };
 
-export default connect()(ProfileInformation2);
+export default connect()(AuthUserProfileInformation);

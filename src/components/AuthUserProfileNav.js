@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const ProfileNav = (props) => {
+const AuthUserProfileNav = (props) => {
   const location = useLocation();
 
   return (
@@ -77,4 +77,4 @@ const ProfileNav = (props) => {
   );
 };
 
-export default ProfileNav;
+export default AuthUserProfileNav;
