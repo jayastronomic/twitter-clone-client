@@ -7,10 +7,10 @@ export default function authUser(state = {}, action) {
     case "UPDATE_AUTH_USER_SUCCESS":
       return action.updatedAuthUser;
     case "ADD_FOLLOWING":
-      state.followings += 1;
+      state.followings = state.followings + 1;
       return state;
     case "SUB_FOLLOWING":
-      state.followings -= 1;
+      state.followings = state.followings - 1;
       return state;
     case "ADD_TWEET_COUNT":
       state.total_tweets += 1;

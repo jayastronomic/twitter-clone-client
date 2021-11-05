@@ -62,7 +62,7 @@ const TweetCard = (props) => {
   if (
     props.location.pathname === "/" ||
     props.location.pathname === `/${props.tweet_user_username}` ||
-    props.location.pathname === `/${props.tweet_user_username}/likes`
+    props.location.pathname.includes("likes")
   ) {
     return (
       <div

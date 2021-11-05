@@ -9,6 +9,7 @@ import authUserTweetCount from "./authUserTweetCount";
 import authUserFollowers from "./authUserFollowers";
 import authUserFollowings from "./authUserFollowings";
 import userTweets from "./userTweets";
+import userLikes from "./userLikes";
 
 export default combineReducers({
   authUser,
@@ -21,4 +22,5 @@ export default combineReducers({
   authUserFollowers,
   authUserFollowings,
   userTweets,
+  userLikes,
 });

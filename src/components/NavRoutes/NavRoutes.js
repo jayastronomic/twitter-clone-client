@@ -113,7 +113,7 @@ export const TweetNavRoute = ({
           history={props.history}
           authUser={authUser}
         />
-        <Component {...props} authUser={authUser} />
+        <Component {...props} authUser={authUser} history={props.history} />
         <Trends2 />
       </div>
     )}

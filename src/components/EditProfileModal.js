@@ -63,23 +63,23 @@ class EditProfleModal extends Component {
     });
   };
 
-  // fileUploadHandler = () => {
-  //   const user = {
-  //     avatar: this.state.selectedAviFile,
-  //   };
+  fileUploadHandler = () => {
+    const user = {
+      avatar: this.state.selectedAviFile,
+    };
 
-  //   const payload = {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(user),
-  //     credentials: "include",
-  //   };
-  //   fetch(API + `${this.props.authUser.id}/update_avi`, payload)
-  //     .then((resp) => resp.json())
-  //     .then((resObj) => console.log(resObj));
-  // };
+    const payload = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+      credentials: "include",
+    };
+    fetch(API + `${this.props.authUser.id}/update_avi`, payload)
+      .then((resp) => resp.json())
+      .then((resObj) => console.log(resObj));
+  };
 
   render() {
     return (

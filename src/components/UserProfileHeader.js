@@ -11,6 +11,10 @@ const UserProfileHeader = (props) => {
       </div>
       <div className="flex flex-col pl-10 -space-y-1.5">
         <p className="font-bold text-xl">{props.user.name}</p>
+        <p className="text-sm text-gray-500">
+          {props.user.total_tweets}&nbsp;
+          {props.user.total_tweets === 1 ? "Tweet" : "Tweets"}
+        </p>
       </div>
     </div>
   );

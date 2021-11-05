@@ -33,7 +33,10 @@ const Tweet = (props) => {
   return (
     <div className="tweet">
       <div className="flex items-center border-b border-gray-100 p-2">
-        <button className="p-2 transition hover:bg-gray-200 rounded-full">
+        <button
+          onClick={() => props.history.goBack()}
+          className="p-2 transition hover:bg-gray-200 rounded-full"
+        >
           <ArrowLeft className="" />
         </button>
         <p className="font-bold text-xl pl-6">Tweet</p>

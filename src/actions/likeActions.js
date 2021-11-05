@@ -18,3 +18,10 @@ export const createLikeSuccess = (obj) => {
     createdLikedTweet: obj,
   };
 };
+
+export const fetchUserLikesSuccess = (arr) => {
+  return {
+    type: "FETCH_USER_LIKES_SUCCESS",
+    userLikes: arr,
+  };
+};

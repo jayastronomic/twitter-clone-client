@@ -1,0 +1,18 @@
+.profile-information {
+  width: 37.5rem;
+}
+
+.avi-border {
+  border-radius: 78%;
+}
+.user-profile-follow-button:hover {
+  border: none;
+}
+
+.user-profile-follow-button:hover:before {
+  content: "Unfollow";
+}
+
+.user-profile-follow-button:hover span {
+  display: none;
+}

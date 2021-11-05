@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "../styles/Profile.css";
+import "../styles/AuthUserProfile.css";
 import { connect } from "react-redux";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 

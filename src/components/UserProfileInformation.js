@@ -1,11 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import "../styles/ProfileInformation2.css";
+import "../styles/UserProfileInformation.css";
 import { Link } from "react-router-dom";
 
+import { addFollowing, subFollowing } from "../actions/followActions";
+
+const API = "http://localhost:3002/api/v1/follows";
+
 const UserProfileInformation = (props) => {
+  const [following, setFollowing] = useState(props.user.followed_user);
+  const follow = () => {
+    const newFollow = {
+      user: {
+        follower_id: props.authUser.id,
+        followed_user_id: props.user.id,
+      },
+    };
+
+    const payload = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newFollow),
+      credentials: "include",
+    };
+
+    fetch(API, payload)
+      .then((resp) => resp.json())
+      .then((resObj) => {
+        if (resObj.created) {
+          setFollowing(!following);
+          props.addFollowing();
+        } else {
+          setFollowing(!following);
+          props.subFollowing();
+        }
+      });
+  };
   return (
-    <div className="relative profile-information-two flex flex-col">
+    <div className="relative profile-information flex flex-col">
       {props.user.background_exist ? (
         <img
           className="profile-bg object-cover"
@@ -25,9 +59,21 @@ const UserProfileInformation = (props) => {
           <i className="absolute top-32  fas fa-user-circle fa-8x text-gray-300" />
         )}
 
-        <button className="text-sm transition absolute right-4 top-52 hover:bg-gray-100 font-bold border border-gray-300 rounded-full py-1.5 px-4">
-          Edit profile
-        </button>
+        {following ? (
+          <button
+            onClick={() => follow()}
+            className="hover:bg-red-100 hover:text-red-600 text-sm transition absolute right-4 top-52 font-bold border border-gray-300 rounded-full py-1.5 px-4 user-profile-follow-button"
+          >
+            <span>Following</span>
+          </button>
+        ) : (
+          <button
+            onClick={() => follow()}
+            className="text-sm transition absolute right-4 top-52 text-white bg-black font-bold border border-gray-300 rounded-full py-1.5 px-4"
+          >
+            Follow
+          </button>
+        )}
 
         <div className="flex flex-col -space-y-1 pb-2">
           <p className="font-bold text-xl">{props.user.name}</p>
@@ -86,5 +132,9 @@ const UserProfileInformation = (props) => {
     </div>
   );
 };
+const mapDispatchToProps = {
+  addFollowing,
+  subFollowing,
+};
 
-export default connect()(UserProfileInformation);
+export default connect(null, mapDispatchToProps)(UserProfileInformation);

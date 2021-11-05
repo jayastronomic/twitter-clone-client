@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import "../styles/ProfileInformation2.css";
+import "../styles/ProfileInformation.css";
 import { Link } from "react-router-dom";
 
 import EditProfleModal from "./EditProfileModal";
@@ -9,7 +9,7 @@ const AuthUserProfileInformation = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative profile-information-two flex flex-col">
+    <div className="relative profile-information flex flex-col">
       {props.authUser.background_exist ? (
         <img
           className="profile-bg object-cover"
