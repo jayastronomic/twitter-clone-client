@@ -8,6 +8,8 @@ import { addFollowing, subFollowing } from "../actions/followActions";
 const API = "http://localhost:3002/api/v1/follows";
 
 const UserProfileInformation = (props) => {
+  const [followers, setFollowers] = useState(props.user.followers);
+  const [followings, setFollowings] = useState(props.user.followings);
   const [following, setFollowing] = useState(props.user.followed_user);
   const follow = () => {
     const newFollow = {
@@ -31,9 +33,11 @@ const UserProfileInformation = (props) => {
       .then((resObj) => {
         if (resObj.created) {
           setFollowing(!following);
+          setFollowers(followers + 1);
           props.addFollowing();
         } else {
           setFollowing(!following);
+          setFollowers(followers - 1);
           props.subFollowing();
         }
       });
@@ -115,7 +119,7 @@ const UserProfileInformation = (props) => {
             to={`/${props.user.username}/following`}
             className="hover:underline"
           >
-            <span className="font-bold">{props.user.followings}</span>
+            <span className="font-bold">{followings}</span>
             &nbsp;
             <span className="text-gray-500">Following</span>
           </Link>
@@ -123,7 +127,7 @@ const UserProfileInformation = (props) => {
             to={`/${props.user.username}/followers`}
             className="hover:underline"
           >
-            <span className="font-bold">{props.user.followers}</span>
+            <span className="font-bold">{followers}</span>
             &nbsp;
             <span className="text-gray-500">Followers</span>
           </Link>

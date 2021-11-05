@@ -14,11 +14,12 @@ const TweetCard = (props) => {
   const [edited, setEdited] = useState(props.edited);
   const [liked, setLiked] = useState(props.liked_by_current_user);
   const [isOpen, setIsOpen] = useState(false);
+  const [numOfLikes, setNumOfLikes] = useState(props.num_of_likes);
   const link = useRef();
   const likeTweet = () => {
     const newLike = {
       user: {
-        user_id: props.authUserId,
+        user_id: props.authUser.id,
         tweet_id: props.id,
       },
     };
@@ -32,14 +33,16 @@ const TweetCard = (props) => {
       credentials: "include",
     };
 
-    fetch(API + `/${props.authUserId}/likes`, payload)
+    fetch(API + `/${props.authUser.id}/likes`, payload)
       .then((resp) => resp.json())
       .then((resObj) => {
         if (resObj.created) {
           toggleLiked();
+          setNumOfLikes(numOfLikes + 1);
         } else {
           props.deleteLikeSuccess(resObj.tweet);
           toggleLiked();
+          setNumOfLikes(numOfLikes - 1);
         }
       });
   };
@@ -64,6 +67,7 @@ const TweetCard = (props) => {
     props.location.pathname === `/${props.tweet_user_username}` ||
     props.location.pathname.includes("likes")
   ) {
+    console.log(props);
     return (
       <div
         onClick={(e) => goToTweet(e)}
@@ -91,9 +95,21 @@ const TweetCard = (props) => {
               onClick={(e) => goToTweet(e)}
               className="flex items-center space-x-0.5"
             >
-              <p className="font-semibold hover:underline">
+              <Link
+                to={
+                  props.authUser.name === props.tweet_user_name
+                    ? `/${props.authUser.username}`
+                    : {
+                        pathname: `/${props.tweet_user_username}`,
+                        state: {
+                          user: props.user,
+                        },
+                      }
+                }
+                className="font-semibold hover:underline"
+              >
                 {props.tweet_user_name}
-              </p>
+              </Link>
               <p className="text-gray-500">@{props.tweet_user_username}</p>
               {edited ? (
                 <p className="text-sm text-gray-400">{" · (edited)"}</p>
@@ -110,7 +126,7 @@ const TweetCard = (props) => {
                   onClick={() => setIsOpen(false)}
                 />
               )}
-              {props.authUserId === props.user_id
+              {props.authUser.id === props.user_id
                 ? isOpen && (
                     <AuthUserTweetDropdown
                       tweet={props}
@@ -136,15 +152,21 @@ const TweetCard = (props) => {
             <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-comment"></i>
             <i className="cursor-pointer transition hover:bg-green-100 p-2 rounded-full hover:text-green-400 fas fa-retweet"></i>
             {liked ? (
-              <i
-                className="cursor-pointer transition hover:bg-red-100 p-2 rounded-full text-red-400 fas fa-heart "
-                onClick={() => likeTweet()}
-              />
+              <div className="flex items-center">
+                <i
+                  className="cursor-pointer transition hover:bg-red-100 p-2 rounded-full text-red-400 fas fa-heart "
+                  onClick={() => likeTweet()}
+                />
+                {numOfLikes === 0 ? null : <p>{numOfLikes}</p>}
+              </div>
             ) : (
-              <i
-                className="cursor-pointer transition hover:bg-red-100 p-2 rounded-full hover:text-red-400 far fa-heart"
-                onClick={() => likeTweet()}
-              />
+              <div className="flex items-center">
+                <i
+                  className="cursor-pointer transition hover:bg-red-100 p-2 rounded-full hover:text-red-400 far fa-heart"
+                  onClick={() => likeTweet()}
+                />
+                {numOfLikes === 0 ? null : <p>{numOfLikes}</p>}
+              </div>
             )}
             <i className="cursor-pointer transition hover:bg-blue-100 p-2 rounded-full hover:text-blue-400 far fa-share-square"></i>
           </div>
@@ -175,9 +197,21 @@ const TweetCard = (props) => {
                 <i className="fas fa-user-circle fa-3x text-gray-300"></i>
               )}
               <div className="flex flex-col -space-y-1 pl-2">
-                <p className="font-bold hover:underline text-sm">
+                <Link
+                  to={
+                    props.authUser.name === props.tweet_user_name
+                      ? `/${props.authUser.username}`
+                      : {
+                          pathname: `/${props.tweet_user_username}`,
+                          state: {
+                            user: props.user,
+                          },
+                        }
+                  }
+                  className="font-bold hover:underline text-sm"
+                >
                   {props.tweet_user_name}
-                </p>
+                </Link>
                 <p className="text-gray-500">@{props.tweet_user_username}</p>
               </div>
             </div>
@@ -192,7 +226,7 @@ const TweetCard = (props) => {
                   onClick={() => setIsOpen(false)}
                 />
               )}
-              {props.authUserId === props.user_id
+              {props.authUser.id === props.user_id
                 ? isOpen && (
                     <AuthUserTweetDropdown
                       tweet={props}
@@ -254,7 +288,7 @@ const TweetCard = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    authUserId: state.authUser.id,
+    authUser: state.authUser,
   };
 };
 
