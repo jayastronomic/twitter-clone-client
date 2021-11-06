@@ -1,3 +1,7 @@
 .auth-user-connects {
   width: 37.5rem;
 }
+
+.auth-user-connects::-webkit-scrollbar {
+  display: none;
+}

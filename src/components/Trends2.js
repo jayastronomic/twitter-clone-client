@@ -18,7 +18,7 @@ const Trends2 = () => {
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 className="focus:outline-none ml-6 bg-transparent w-60"
-                placeholder="Search Diet Twitter"
+                placeholder="Search Twitter"
               />
             </div>
           ) : (
@@ -27,7 +27,7 @@ const Trends2 = () => {
               <input
                 onFocus={() => setIsFocused(true)}
                 className="focus:outline-none ml-6 bg-transparent w-60"
-                placeholder="Search Diet Twitter"
+                placeholder="Search Twitter"
               />
             </div>
           )}

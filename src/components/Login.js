@@ -99,6 +99,7 @@ class Login extends Component {
               Log in to Twitter {"     "}
             </pre>
             <input
+              required
               onChange={this.handleChange}
               name="usernameOrEmail"
               value={this.state.usernameOrEmail}
@@ -107,6 +108,7 @@ class Login extends Component {
             />
 
             <input
+              required
               onChange={this.handleChange}
               type="password"
               name="password"

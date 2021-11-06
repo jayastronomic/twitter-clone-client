@@ -81,6 +81,7 @@ class SignUp extends Component {
               Sign up for Twitter {"   "}
             </pre>
             <input
+              required
               type="email"
               onChange={this.handleChange}
               name="email"
@@ -89,6 +90,7 @@ class SignUp extends Component {
               placeholder="Email"
             />
             <input
+              required
               onChange={this.handleChange}
               name="username"
               value={this.state.username}
@@ -96,6 +98,7 @@ class SignUp extends Component {
               placeholder="Username"
             />
             <input
+              required
               onChange={this.handleChange}
               name="name"
               value={this.state.name}
@@ -103,6 +106,7 @@ class SignUp extends Component {
               placeholder="Name"
             />
             <input
+              required
               type="password"
               onChange={this.handleChange}
               name="password"
@@ -111,6 +115,7 @@ class SignUp extends Component {
               placeholder="Password"
             />
             <input
+              required
               type="password"
               onChange={this.handleChange}
               name="passwordConfirmation"
